@@ -1,24 +1,20 @@
 node{
-    stage('get clone'){
+    stage('Checkout'){
         //check CODE
-       echo "hello"
+       echo "Checkout"
     }
 
-    //定义mvn环境
-    def mvnHome = tool 'M3'
-    env.PATH = "${mvnHome}/bin:${env.PATH}"
-
-    stage('mvn test'){
+    stage('Build'){
         //mvn 测试
-        sh "mvn test"
+        echo "Build"
     }
 
-    stage('mvn build'){
+    stage('Test'){
         //mvn构建
-        sh "mvn clean install -Dmaven.test.skip=true"
+        echo "Test"
     }
 
-    stage('deploy'){
+    stage('Deploy'){
         //执行部署脚本
         echo "deploy ......"
     }
