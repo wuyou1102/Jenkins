@@ -2,6 +2,7 @@ node{
     stage('Checkout'){
         //check CODE
        echo "Checkout"
+        println "sss"
     }
 
     stage('Build'){
@@ -16,6 +17,6 @@ node{
 
     stage('Deploy'){
         //执行部署脚本
-        echo "deploy ......"
+        echo "Deploy ......"
     }
 }
