@@ -7,7 +7,7 @@ node {
         stage('Clone') {
             sh "pwd"
             sh "ls"
-            def Learn =load 'Learn.groovy'
+            def Learn =load 'src/Learn.groovy'
             Learn.Groovy()
         }
         stage('Build') {
