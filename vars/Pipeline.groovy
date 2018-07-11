@@ -1,6 +1,5 @@
-import learn.Learn
+import Learn
 
-def l = Learn()
 node {
     stage('Checkout') {
         echo "Checkout"
@@ -8,7 +7,7 @@ node {
 
     stage('Build') {
         echo "Build"
-        l.Groovy()
+        Learn.Groovy()
     }
 
     stage('Test') {
