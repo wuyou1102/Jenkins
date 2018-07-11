@@ -1,5 +1,4 @@
-import Learn
-
+import com.wuyou.Learn
 node {
     stage('Checkout') {
         echo "Checkout"
