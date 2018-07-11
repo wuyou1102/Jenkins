@@ -1,33 +1,18 @@
-
 node {
     // Clean workspace before doing anything
     deleteDir()
-
     try {
-        stage('Clone') {
-            sh "pwd"
-            sh "ls"
-            def Learn =load 'src/Learn.groovy'
-            Learn.Groovy()
+        stage('Checkout') {
+            echo "Checkout"
         }
         stage('Build') {
-            sh "echo 'building ${config.projectName} ...'"
+            echo "build"
         }
         stage('Tests') {
-            parallel 'static': {
-                sh "echo 'shell scripts to run static tests...'"
-            },
-                    'unit': {
-                        sh "echo 'shell scripts to run unit tests...'"
-                    },
-                    'integration': {
-                        sh "echo 'shell scripts to run integration tests...'"
-                    }
+            echo "build"
         }
         stage('Deploy') {
-            sh "echo 'deploying to server ${config.serverDomain}...'"
-            sh "echo Itai ganot"
-            sh "echo Itai"
+            echo "build"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
