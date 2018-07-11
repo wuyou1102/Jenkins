@@ -5,7 +5,7 @@ node {
     try {
         stage('Checkout') {
             echo "Checkout"
-            git url: 'ssh://jenkins@192.168.90.181:29418/9201_1'
+            checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'a22ba1a8-6275-4fdf-baf9-018211d45248', url: 'ssh://jenkins@192.168.90.181:29418/9201_1']]]
 
             // Fetch the changeset to a local branch using the build parameters provided to the
             // build by the Gerrit plugin...
