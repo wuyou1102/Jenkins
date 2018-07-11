@@ -1,10 +1,12 @@
 
++
 node {
     // Clean workspace before doing anything
     deleteDir()
 
     try {
         stage('Clone') {
+            sh "pwd"
             def Learn =load 'Learn.groovy'
             Learn.Groovy()
         }

@@ -1,11 +1,10 @@
-
+import Learn
 node {
     // Clean workspace before doing anything
 //    deleteDir()
 
     try {
         stage('Clone') {
-            def Learn =load 'Learn.groovy'
             Learn.Groovy()
         }
         stage('Build') {
