@@ -5,9 +5,8 @@ node {
     try {
         stage('Checkout') {
             echo "Checkout"
-            git url: 'ssh://jenkins@192.168.90.181:29418/9201_1'
-            def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
-            sh "git fetch origin ${GERRIT_REFSPEC}:${changeBranch}"
+            sh "git clone ssh://jenkins@192.168.90.181:29418/9201_1"
+            sh "git fetch ssh://jenkins@192.168.90.181:29418/9201_1 refs/changes/18/18/1"
             sh "git checkout ${changeBranch}"
         }
         stage('Build') {
