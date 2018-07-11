@@ -1,22 +1,17 @@
 node{
     stage('Checkout'){
-        //check CODE
        echo "Checkout"
-        println "sss"
     }
 
     stage('Build'){
-        //mvn 测试
         echo "Build"
     }
 
     stage('Test'){
-        //mvn构建
         echo "Test"
     }
 
     stage('Deploy'){
-        //执行部署脚本
         echo "Deploy ......"
     }
 }
