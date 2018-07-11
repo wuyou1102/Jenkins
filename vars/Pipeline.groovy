@@ -1,19 +1,35 @@
-import com.wuyou.Learn
+import src.com.wuyou.Learn
+
+
 node {
-    stage('Checkout') {
-        echo "Checkout"
-    }
+    // Clean workspace before doing anything
+    deleteDir()
 
-    stage('Build') {
-        echo "Build"
-        Learn.Groovy()
-    }
-
-    stage('Test') {
-        echo "Test"
-    }
-
-    stage('Deploy') {
-        echo "Deploy ......"
+    try {
+        stage('Clone') {
+            Learn.Groovy()
+        }
+        stage('Build') {
+            sh "echo 'building ${config.projectName} ...'"
+        }
+        stage('Tests') {
+            parallel 'static': {
+                sh "echo 'shell scripts to run static tests...'"
+            },
+                    'unit': {
+                        sh "echo 'shell scripts to run unit tests...'"
+                    },
+                    'integration': {
+                        sh "echo 'shell scripts to run integration tests...'"
+                    }
+        }
+        stage('Deploy') {
+            sh "echo 'deploying to server ${config.serverDomain}...'"
+            sh "echo Itai ganot"
+            sh "echo Itai"
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
     }
 }
