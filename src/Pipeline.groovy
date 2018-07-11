@@ -1,6 +1,7 @@
+#!groovy
 import com.wuyou.Learn
-println("sss")
 
+println("sss")
 
 node {
     // Clean workspace before doing anything

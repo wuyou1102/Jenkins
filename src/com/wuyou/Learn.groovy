@@ -1,6 +1,6 @@
 package com.wuyou
 
-static void Groovy(args) {
+def Groovy() {
     println("hello world!")
 }
 
