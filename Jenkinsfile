@@ -8,6 +8,7 @@ node {
             sh "git clone ssh://jenkins@192.168.90.181:29418/9201_1"
             sh "cd 9201_1"
             sh "ls"
+            sh "cd 9201_1"
             sh "git fetch ssh://jenkins@192.168.90.181:29418/9201_1 refs/changes/18/18/1 && git checkout FETCH_HEAD"
         }
         stage('Build') {
