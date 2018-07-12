@@ -1,6 +1,8 @@
 node {
-    // Clean workspace before doing anything
-        deleteDir()
+
+    sh "ls"
+    deleteDir()
+    sh "ls"
 
     try {
         stage('Checkout') {
