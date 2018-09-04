@@ -17,5 +17,9 @@ from libs import Utility
 home_folder = '~/G4_Version/'
 cur_folder = os.path.join(home_folder, Utility.get_timestamp())
 
-if not os.path.exists(home_folder):
+if not os.path.exists(cur_folder):
+    print "Create New Folder: %s " % cur_folder
     os.makedirs(cur_folder)
+dict_env = os.environ
+print dict_env["WORKSPACE"]
+os.chdir(cur_folder)
