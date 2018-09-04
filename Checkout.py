@@ -18,11 +18,11 @@ environment = os.environ
 
 HOME = '/home/bspserver'
 G4 = 'G4_Version'
-WORKSPACE = os.path.join(HOME, G4, Utility.get_timestamp())
+current_folder = os.path.join(HOME, G4, Utility.get_timestamp())
 
 if not os.path.exists(WORKSPACE):
     print "Create New Folder: %s " % WORKSPACE
-    os.makedirs(WORKSPACE)
+    os.makedirs(current_folder)
+os.environ['CURRENT'] = current_folder
 
-environment["WORKSPACE"] = WORKSPACE
-os.chdir(WORKSPACE)
+os.chdir(current_folder)
