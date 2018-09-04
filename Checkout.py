@@ -16,13 +16,13 @@ environment = os.environ
 # sh
 # "git checkout ${changeBranch}"
 
-HOME = environment['HOME']
+HOME = '/home/bspserver'
 G4 = 'G4_Version'
-cur_folder = os.path.join(HOME, G4, Utility.get_timestamp())
+WORKSPACE = os.path.join(HOME, G4, Utility.get_timestamp())
 
-if not os.path.exists(cur_folder):
-    print "Create New Folder: %s " % cur_folder
-    os.makedirs(cur_folder)
-dict_env = os.environ
-dict_env["WORKSPACE"] = cur_folder
-os.chdir(cur_folder)
+if not os.path.exists(WORKSPACE):
+    print "Create New Folder: %s " % WORKSPACE
+    os.makedirs(WORKSPACE)
+
+environment["WORKSPACE"] = WORKSPACE
+os.chdir(WORKSPACE)
