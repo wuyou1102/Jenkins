@@ -2,8 +2,7 @@ node {
 
     try {
         stage('Checkout') {
-            sh "ls"
-            sh "python Checkout.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
         stage('Build') {
             sh "python Build.py"
