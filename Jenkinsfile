@@ -2,19 +2,16 @@ node {
 
     try {
         stage('Checkout') {
-            git url: 'ssh://jenkins@192.168.90.181:29418/9201_1'
-            def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
-            sh "git fetch origin ${GERRIT_REFSPEC}:${changeBranch}"
-            sh "git checkout ${changeBranch}"
+            sh "Checkout.py"
         }
         stage('Build') {
-            echo "build"
+            sh "Build.py"
         }
         stage('Test') {
-            echo "Test"
+            sh "Test.py"
         }
         stage('Deploy') {
-            echo "Deploy"
+            sh "Test.py"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
