@@ -2,6 +2,7 @@ node {
 
     try {
         stage('Checkout') {
+            sh "ls"
             sh "python Checkout.py"
         }
         stage('Build') {
