@@ -1,9 +1,5 @@
 node {
 
-    sh "ls"
-    deleteDir()
-    sh "ls"
-
     try {
         stage('Checkout') {
             git url: 'ssh://jenkins@192.168.90.181:29418/9201_1'
@@ -12,7 +8,6 @@ node {
             sh "git checkout ${changeBranch}"
         }
         stage('Build') {
-            sh "cat a.log"
             echo "build"
         }
         stage('Test') {
