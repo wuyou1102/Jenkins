@@ -16,7 +16,7 @@ environment = os.environ
 # sh
 # "git checkout ${changeBranch}"
 
-HOME = '/home/bspserver'
+HOME = environment['HOME']
 G4 = 'G4_Version'
 current_folder = os.path.join(HOME, G4, Utility.get_timestamp())
 
