@@ -5,13 +5,13 @@ node {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
         stage('Build') {
-            sh "python Build.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Build.py"
         }
         stage('Test') {
-            sh "python Test.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Test.py"
         }
         stage('Deploy') {
-            sh "python Test.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Deploy.py"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
