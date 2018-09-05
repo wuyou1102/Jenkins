@@ -1,25 +1,20 @@
-pipeline {
-    agent any
-    stages {
+node {
+
+    try {
         stage('Checkout') {
-            steps {
-                sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
-            }
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
         stage('Build') {
-            steps {
-                sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Build.py"
-            }
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Build.py"
         }
         stage('Test') {
-            steps {
-                sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Test.py"
-             }
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Test.py"
         }
         stage('Deploy') {
-            steps {
-                sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Deploy.py"
-            }
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Deploy.py"
         }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
     }
 }
