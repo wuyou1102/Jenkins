@@ -1,11 +1,6 @@
 node {
 
     try {
-
-        env.TIME=${it.timestampString}
-        env.TIMESTAMP=''
-        env.COMPILER_FOLDER = '/home/bspserver/sda/G4_SourceCode/'
-        env.DEPLOY_FOLDER = '/home/bspserver/sda/G4_DailyBuild/'
         stage('Checkout') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
