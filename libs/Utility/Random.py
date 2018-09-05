@@ -17,3 +17,4 @@ def string(length=6):
 
 def integer(a, b):
     return __random.randint(a, b)
+

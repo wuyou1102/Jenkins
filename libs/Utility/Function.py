@@ -2,8 +2,19 @@
 import os
 
 
-def get_c2_complier_path():
-    compiler = os.environ['COMPILER_FOLDER']
+def get_complier_path():
+    path = os.environ['COMPILER_FOLDER']
     timestamp = os.environ['BUILD_TIMESTAMP']
-    version_name = "C2_%s" % timestamp
-    return os.path.join(compiler, version_name)
+    program_name = os.environ['PROGRAM_NAME']
+    version_type = os.environ['VERSION_TYPE']
+    version_name = "%s_%s_%s" % (program_name, version_type, timestamp)
+    return os.path.join(path, version_name)
+
+
+def get_deploy_path():
+    path = os.environ['DEPLOY_FOLDER']
+    timestamp = os.environ['BUILD_TIMESTAMP']
+    program_name = os.environ['PROGRAM_NAME']
+    version_type = os.environ['VERSION_TYPE']
+    version_name = "%s_%s_%s" % (program_name, version_type, timestamp)
+    return os.path.join(path, version_name)
