@@ -1,7 +1,7 @@
 node {
 
     try {
-        ${env.SP} = "/home/a/"
+        env.CURRENT = 'master'
         stage('Checkout') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
