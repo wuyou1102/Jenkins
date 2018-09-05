@@ -2,7 +2,6 @@ import os
 
 from libs import Utility
 
-environment = os.environ
 # git
 # url: 'ssh://jenkins@192.168.90.181:29418/9201_1'
 #
@@ -17,11 +16,9 @@ environment = os.environ
 # "git checkout ${changeBranch}"
 
 
+workspace_path = Utility.get_compiler_path()
 
-current_folder = Utility.get_c2_complier_path()
-
-if not os.path.exists(current_folder):
-    print "Create New Folder: %s " % current_folder
-    os.makedirs(current_folder)
-
-os.chdir(current_folder)
+if not os.path.exists(workspace_path):
+    print "Create New Folder: %s " % workspace_path
+    os.makedirs(workspace_path)
+os.chdir(workspace_path)

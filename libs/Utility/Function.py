@@ -2,7 +2,7 @@
 import os
 
 
-def get_complier_path():
+def get_compiler_path():
     path = os.environ['COMPILER_FOLDER']
     timestamp = os.environ['BUILD_TIMESTAMP']
     program_name = os.environ['PROGRAM_NAME']
