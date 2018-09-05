@@ -1,5 +1,6 @@
 node {
     try {
+        echo "1"
         stage('Checkout') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
