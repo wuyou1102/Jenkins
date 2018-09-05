@@ -1,5 +1,5 @@
 node {
-    env.BUILD_VERSION="${BUILD_DATE_FORMATTED, "yyyyMMdd"}"
+    
     try {
         stage('Checkout') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
