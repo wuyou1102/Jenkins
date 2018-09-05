@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    stages {
         stage('Checkout') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
@@ -12,4 +13,5 @@ pipeline {
         stage('Deploy') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Deploy.py"
         }
+    }
 }
