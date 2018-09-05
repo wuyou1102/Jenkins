@@ -16,13 +16,12 @@ environment = os.environ
 # sh
 # "git checkout ${changeBranch}"
 
-HOME = environment['HOME']
-G4 = 'G4_Version'
-current_folder = os.path.join(HOME, G4, Utility.get_timestamp())
+
+
+current_folder = Utility.get_c2_complier_path()
 
 if not os.path.exists(current_folder):
     print "Create New Folder: %s " % current_folder
     os.makedirs(current_folder)
-os.environ['CURRENT'] = current_folder
 
 os.chdir(current_folder)
