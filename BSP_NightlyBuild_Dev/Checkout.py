@@ -11,9 +11,7 @@ repo_init_exit_code = Utility.execute_command(repo_init_command)
 if repo_init_exit_code != 0:
     raise IOError
 
-repo_sync_command = Utility.Repo.sync(cores=8)
+repo_sync_command = Utility.Repo.sync()
 repo_sync_exit_code = Utility.execute_command(repo_sync_command)
 if repo_sync_exit_code != 0:
     raise IOError
-
-

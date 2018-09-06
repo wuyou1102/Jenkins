@@ -45,5 +45,5 @@ def execute_command(cmd):
         print e.message
     finally:
         exit_code = p.wait()
-        print 'Command\"%s\" Exit Code is : %s' % (cmd, exit_code)
+        print 'Executed command:\"%s\" and exit code is : \"%s\"' % (cmd, exit_code)
         return exit_code
