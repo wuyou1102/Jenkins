@@ -6,10 +6,10 @@ os.chdir(workspace_path)
 
 envsetup_command = "/bin/bash build/envsetup.sh"
 link_command = "/bin/bash build/link.sh"
-lunch_command = "lunch g2-userdebug general"
-ulimit_command = "ulimit -c unlimited"
-update_command = "make update-api -j8"
-make_command = "make -j8"
+lunch_command = "/bin/bash lunch g2-userdebug general"
+ulimit_command = "/bin/bash ulimit -c unlimited"
+update_command = "/bin/bash make update-api -j8"
+make_command = "/bin/bash make -j8"
 
 commands = [
     envsetup_command,
