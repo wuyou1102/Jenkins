@@ -17,7 +17,7 @@ from libs import Utility
 
 
 workspace_path = Utility.get_compiler_path()
-# Utility.close_umask()
+Utility.set_umask()
 Utility.create_folder(workspace_path)
 
 os.chdir(workspace_path)
