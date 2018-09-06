@@ -2,16 +2,16 @@ node {
 
     try {
         stage('Checkout') {
-            echo "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/${env.JOB_NAME}/Checkout.py"
+            echo "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
         stage('Build') {
-            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/${env.JOB_NAME}/Build.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Build.py"
         }
         stage('Test') {
-            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/${env.JOB_NAME}/Test.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Test.py"
         }
         stage('Deploy') {
-            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/${env.JOB_NAME}/Deploy.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Deploy.py"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
