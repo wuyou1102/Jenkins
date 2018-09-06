@@ -25,7 +25,7 @@ if not os.path.exists(workspace_path):
     os.makedirs(workspace_path)
 os.chdir(workspace_path)
 stdin, stdout, stderr = os.popen3(
-    Utility.Repo.init(url='ssh://youwu@gerrit.sensethink.cn:29418/manifest', branch='C2_8.1_master'))
+    Utility.Repo.init(url='ssh://weicheng@gerrit.sensethink.cn:29418/manifest', branch='C2_8.1_master'))
 print repr(stdout.read())
 print repr(stderr.read())
 stdin, stdout, stderr = os.popen3(Utility.Repo.sync(thread_num=8))
