@@ -18,3 +18,12 @@ def get_deploy_path():
     version_type = os.environ['VERSION_TYPE']
     version_name = "%s_%s_%s" % (program_name, version_type, timestamp)
     return os.path.join(path, version_name)
+
+
+def create_folder(path):
+    if not os.path.exists(path):
+        print "Create New Folder: %s " % path
+        tmp = os.umask(000)
+        os.makedirs(path)
+        os.umask(tmp)
+    return path
