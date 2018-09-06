@@ -20,7 +20,6 @@ workspace_path = Utility.get_compiler_path()
 
 if not os.path.exists(workspace_path):
     print "Create New Folder: %s " % workspace_path
-    os.system()
     os.makedirs(workspace_path, mode=755)
 os.chdir(workspace_path)
 stdin, stdout, stderr = os.popen3(
