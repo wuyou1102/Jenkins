@@ -25,7 +25,7 @@ def Repo_Sync():
         print e.message
 
 
-workspace_path = '/sda/tmp'
+workspace_path = Utility.get_compiler_path()
 Utility.create_folder(workspace_path)
 
 os.chdir(workspace_path)
