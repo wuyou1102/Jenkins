@@ -23,9 +23,7 @@ def get_deploy_path():
 def create_folder(path):
     if not os.path.exists(path):
         print "Create New Folder: %s " % path
-        tmp = os.umask(000)
         os.makedirs(path)
-        os.umask(tmp)
     return path
 
 
