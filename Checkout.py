@@ -6,7 +6,7 @@ import subprocess
 
 def Repo_Init():
     cmd = Utility.Repo.init(url='ssh://youwu@gerrit.sensethink.cn:29418/manifest', branch='C2_8.1_master')
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True)
     try:
         while True:
             print p.stdout.readline()  # block/wait
@@ -17,7 +17,7 @@ def Repo_Init():
 
 def Repo_Sync():
     cmd = Utility.Repo.sync(thread_num=8)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True)
     try:
         while True:
             print p.stdout.readline()  # block/wait
