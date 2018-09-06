@@ -4,8 +4,8 @@ import os
 workspace_path = '/home/bspserver/sda/C2_SourceCode/c2_userdebug_20180906.180549/'
 os.chdir(workspace_path)
 
-envsetup_command = "source build/envsetup.sh"
-link_command = "source build/link.sh"
+envsetup_command = "/bin/bash build/envsetup.sh"
+link_command = "/bin/bash build/link.sh"
 lunch_command = "lunch g2-userdebug general"
 ulimit_command = "ulimit -c unlimited"
 update_command = "make update-api -j8"
