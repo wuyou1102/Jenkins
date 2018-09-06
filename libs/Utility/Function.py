@@ -1,5 +1,6 @@
 # -*- encoding:UTF-8 -*-
 import os
+import subprocess
 
 
 def get_compiler_path():
@@ -33,3 +34,14 @@ def close_umask():
 
 def set_umask(mask=022):
     os.umask(mask)
+
+
+def execute_command(cmd):
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True)
+    try:
+        for line in iter(p.stdout.readline, b''):
+            print line.rstrip()
+    except Exception, e:
+        print e.message
+    finally:
+        return p.wait()

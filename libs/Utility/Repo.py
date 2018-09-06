@@ -7,6 +7,6 @@ def init(url, branch):
     return cmd
 
 
-def sync(thread_num):
-    cmd = '{repo} sync -j{thread_num}'.format(repo=__repo, thread_num=thread_num)
+def sync(cores=8):
+    cmd = '{repo} sync -j{cores}'.format(repo=__repo, cores=cores)
     return cmd
