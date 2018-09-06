@@ -31,5 +31,5 @@ def close_umask():
     set_umask(mask=0000)
 
 
-def set_umask(mask=0022):
+def set_umask(mask=022):
     os.umask(mask)
