@@ -2,7 +2,7 @@ node {
 
     try {
         stage('Checkout') {
-            echo "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
+            sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Checkout.py"
         }
         stage('Build') {
             sh "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/Build.py"
