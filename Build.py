@@ -2,7 +2,7 @@ from libs import Utility
 import os
 import subprocess
 
-workspace_path = '/home/bspserver/sda/C2_SourceCode/c2_userdebug_20180906.180549/'
+workspace_path = Utility.get_compiler_path()
 os.chdir(workspace_path)
 
 envsetup_command = "source build/envsetup.sh"
