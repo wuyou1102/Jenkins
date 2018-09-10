@@ -1,4 +1,4 @@
-import Environment
+from libs import Environment
 
 __repo = 'repo'
 

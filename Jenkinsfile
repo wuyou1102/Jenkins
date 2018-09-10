@@ -2,16 +2,16 @@ node {
     try {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout') {
-                echo "python BSP_NightlyBuild/Checkout.py"
+                echo "python Main.py Checkout"
             }
             stage('Build') {
-                echo "python BSP_NightlyBuild/Build.py"
+                echo "python Main.py Build"
             }
             stage('Test') {
-                sh "python BSP_NightlyBuild/Test.py"
+                sh "python Main.py Test"
             }
             stage('Deploy') {
-                sh "python BSP_NightlyBuild/Deploy.py"
+                sh "python Main.py Deploy"
             }
         }
     } catch (err) {

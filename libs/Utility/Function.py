@@ -1,17 +1,17 @@
 # -*- encoding:UTF-8 -*-
 import os
 import subprocess
-import Environment as env
+from libs import Environment as Env
 
 
 def get_compiler_path():
-    version_name = "%s_%s_%s" % (env.PROGRAM_NAME, env.VERSION_TYPE, env.BUILD_TIMESTAMP)
-    return os.path.join(env.COMPILER_FOLDER, version_name)
+    version_name = "%s_%s_%s" % (Env.PROGRAM_NAME, Env.VERSION_TYPE, Env.BUILD_TIMESTAMP)
+    return os.path.join(Env.COMPILER_FOLDER, version_name)
 
 
 def get_deploy_path():
-    version_name = "%s_%s_%s" % (env.PROGRAM_NAME, env.VERSION_TYPE, env.BUILD_TIMESTAMP)
-    return os.path.join(env.DEPLOY_FOLDER, version_name)
+    version_name = "%s_%s_%s" % (Env.PROGRAM_NAME, Env.VERSION_TYPE, Env.BUILD_TIMESTAMP)
+    return os.path.join(Env.DEPLOY_FOLDER, version_name)
 
 
 def create_folder(path):
