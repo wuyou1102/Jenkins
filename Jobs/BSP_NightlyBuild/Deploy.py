@@ -5,7 +5,7 @@ import shutil
 
 
 def get_output_path():
-    compiler_path = Utility.get_compiler_path()
+    compiler_path = "/home/bspserver/sda/C2_SourceCode/c2_userdebug_20180907.170246/"  # Utility.get_compiler_path()
     output_path = os.path.join(compiler_path, 'out', 'target', 'product', 'g2')
     for folder in os.listdir(output_path):
         if "g2-" in folder:
@@ -22,6 +22,7 @@ def run(*args, **kwargs):
         for f in os.listdir(output_path):
             src = os.path.join(output_path, f)
             dst = os.path.join(deploy_path, f)
+            print "Copy \"%s\" to \"%s\"" % (src, dst)
             shutil.copyfile(src=src, dst=dst)
     else:
         print "Can not find out file."
