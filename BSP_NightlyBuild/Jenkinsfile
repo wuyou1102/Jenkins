@@ -1,17 +1,19 @@
 node {
     try {
-        dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/")
         stage('Checkout') {
-            sh "ls"
+            dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/")
             echo "python BSP_NightlyBuild/Checkout.py"
         }
         stage('Build') {
+            dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/")
             echo "python BSP_NightlyBuild/Build.py"
         }
         stage('Test') {
+            dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/")
             sh "python BSP_NightlyBuild/Test.py"
         }
         stage('Deploy') {
+            dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/")
             sh "python BSP_NightlyBuild/Deploy.py"
         }
     } catch (err) {
