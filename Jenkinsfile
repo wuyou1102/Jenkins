@@ -2,10 +2,10 @@ node {
     try {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout') {
-                echo "python Main.py Checkout"
+                sh "python Main.py Checkout"
             }
             stage('Build') {
-                echo "python Main.py Build"
+                sh "python Main.py Build"
             }
             stage('Test') {
                 sh "python Main.py Test"
