@@ -1,24 +1,17 @@
 # -*- encoding:UTF-8 -*-
 import os
 import subprocess
+import Environment as env
 
 
 def get_compiler_path():
-    path = os.environ['COMPILER_FOLDER']
-    timestamp = os.environ['BUILD_TIMESTAMP']
-    program_name = os.environ['PROGRAM_NAME']
-    version_type = os.environ['VERSION_TYPE']
-    version_name = "%s_%s_%s" % (program_name, version_type, timestamp)
-    return os.path.join(path, version_name)
+    version_name = "%s_%s_%s" % (env.PROGRAM_NAME, env.VERSION_TYPE, env.BUILD_TIMESTAMP)
+    return os.path.join(env.COMPILER_FOLDER, version_name)
 
 
 def get_deploy_path():
-    path = os.environ['DEPLOY_FOLDER']
-    timestamp = os.environ['BUILD_TIMESTAMP']
-    program_name = os.environ['PROGRAM_NAME']
-    version_type = os.environ['VERSION_TYPE']
-    version_name = "%s_%s_%s" % (program_name, version_type, timestamp)
-    return os.path.join(path, version_name)
+    version_name = "%s_%s_%s" % (env.PROGRAM_NAME, env.VERSION_TYPE, env.BUILD_TIMESTAMP)
+    return os.path.join(env.DEPLOY_FOLDER, version_name)
 
 
 def create_folder(path):

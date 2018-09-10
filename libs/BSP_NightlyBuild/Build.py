@@ -1,6 +1,5 @@
 from libs import Utility
 import os
-import subprocess
 
 workspace_path = Utility.get_compiler_path()
 os.chdir(workspace_path)
