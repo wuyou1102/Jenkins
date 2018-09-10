@@ -3,7 +3,8 @@ import os
 from libs import Utility
 
 
-def run():
+def run(*args, **kwargs):
+    Utility.print_info(__file__)
     workspace_path = Utility.get_compiler_path()
     Utility.create_folder(workspace_path)
     os.chdir(workspace_path)

@@ -40,3 +40,20 @@ def execute_command(cmd):
         exit_code = p.wait()
         print 'Executed command:\"%s\" and exit code is : \"%s\"' % (cmd, exit_code)
         return exit_code
+
+
+def get_job_file_info(_file):
+    tmp = _file.split(os.path.sep)
+    # tmp = os.path.split(_file)
+    job = tmp[-2]
+    stage = tmp[-1]
+    return "%s:%s" % (job, stage)
+
+
+def print_info(_file, *args, **kwargs):
+    title = get_job_file_info(_file)
+    print "*" * 50
+    print "*" + title.ljust(48) + "*"
+    print "* Args:" + repr(args).ljust(42) + "*"
+    print "* Kwargs:" + repr(kwargs).ljust(40) + "*"
+    print "*" * 50

@@ -2,7 +2,8 @@ from libs import Utility
 import os
 
 
-def run():
+def run(*args, **kwargs):
+    Utility.print_info(__file__)
     workspace_path = Utility.get_compiler_path()
     os.chdir(workspace_path)
 
