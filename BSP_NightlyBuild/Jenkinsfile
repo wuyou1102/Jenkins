@@ -1,6 +1,8 @@
 node {
-
+    sh "cd ${env.WORKSPACE}/../${env.JOB_NAME}@script/"
+    sh "ls"
     try {
+
         stage('Checkout') {
             echo "python ${env.WORKSPACE}/../${env.JOB_NAME}@script/BSP_NightlyBuild/Checkout.py"
         }
