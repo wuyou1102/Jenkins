@@ -5,7 +5,7 @@ from libs.Utility import Mail
 
 
 def send_mail():
-    mail = Mail()
+    mail = Mail.Mail()
     mail.add_subject(" BSP build start")
     mail.add_content(" BSP")
     mail.send()
