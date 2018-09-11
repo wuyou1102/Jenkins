@@ -6,12 +6,17 @@ import shutil
 
 
 def get_output_path():
-    compiler_path = Utility.get_compiler_path()
-    output_path = os.path.join(compiler_path, 'out', 'target', 'product', 'g2')
-    for folder in os.listdir(output_path):
+    out_path = get_out_path()
+    for folder in os.listdir(out_path):
         if "g2-userdebug-" in folder:
-            return os.path.join(output_path, folder)
+            return os.path.join(out_path, folder)
     return None
+
+
+def get_out_path():
+    compiler_path = Utility.get_compiler_path()
+    out_path = os.path.join(compiler_path, 'out', 'target', 'product', 'g2')
+    return out_path
 
 
 def copy_binary_to_deploy(src_folder, dst_folder):
@@ -51,7 +56,7 @@ def run(*args, **kwargs):
     if output_path:
         deploy_path = Utility.get_deploy_path()
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'Binary'))
-        copy_debug_info_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'DebugInfo'))
+        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, 'DebugInfo'))
         create_release_notes()
     else:
         print "Can not find out file."
