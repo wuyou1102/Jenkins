@@ -15,6 +15,11 @@ def sync(cores=None):
     return cmd
 
 
+def log(since):
+    cmd = '{repo} forall -c git log --since=\"{since}\"'.format(repo=__repo, since=since)
+    return cmd
+
+
 def make_update_api(cores=None):
     if cores is None:
         cores = Environment.CORE_QUANTITY

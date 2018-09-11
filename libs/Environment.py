@@ -1,8 +1,10 @@
 # -*- encoding:UTF-8 -*-
 import os
-import Configuration as cfg
+import time
 
 environ = os.environ
+__debug = True
+__timestamp = "20180911.091936"
 
 
 def get(attr_name):
@@ -11,7 +13,8 @@ def get(attr_name):
 
 COMPILER_FOLDER = get('COMPILER_FOLDER')  # 编译目录
 DEPLOY_FOLDER = get('DEPLOY_FOLDER')  # 发布目录
-BUILD_TIMESTAMP = get('BUILD_TIMESTAMP')  # JENKINS触发事件
+BUILD_TIMESTAMP = get('BUILD_TIMESTAMP') if not __debug else __timestamp  # JENKINS触发事件
+BUILD_TIME = time.mktime(time.strptime(BUILD_TIMESTAMP, "%Y%m%d.%H%M%S"))  # float型
 PROGRAM_NAME = get('PROGRAM_NAME')  # 项目名称
 JOB_NAME = get('JOB_NAME')  # JENKINS JOB名称
 VERSION_TYPE = get('VERSION_TYPE')  # 版本类型
