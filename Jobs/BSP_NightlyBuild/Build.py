@@ -3,7 +3,7 @@ import os
 
 
 def run(*args, **kwargs):
-    Utility.print_info(__file__)
+    Utility.print_info(__file__, args, kwargs)
     workspace_path = Utility.get_compiler_path()
     os.chdir(workspace_path)
 

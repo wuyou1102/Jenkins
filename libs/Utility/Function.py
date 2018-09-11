@@ -2,7 +2,7 @@
 import os
 import subprocess
 from libs import Environment as Env
-import re
+import psutil
 
 
 def get_compiler_path():
@@ -108,3 +108,19 @@ def format_commit_msg(lines):
         m_dict["Info"] = "\n".join(block)
         lst.append(m_dict)
     return lst
+
+
+def get_disk_usage(path):
+    usage = psutil.disk_usage(path)
+    gigabyte = 1024 * 1024 * 1024  # 1024Byte *1024*KB*1024MB
+    free = usage.free / gigabyte
+    used = usage.used / gigabyte
+    total = usage.total / gigabyte
+    return free, used, total
+
+
+if __name__ == '__main__':
+    free, used, total = get_disk_usage("C:\\")
+    print 43 > free
+    print 43 == free
+    print 43 < free

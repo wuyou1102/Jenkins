@@ -4,8 +4,16 @@ from libs import Utility
 
 
 def run(*args, **kwargs):
-    Utility.print_info(__file__)
+    Utility.print_info(__file__, args, kwargs)
     workspace_path = Utility.get_compiler_path()
+    free, used, total = Utility.get_disk_usage(workspace_path)
+    print "free:%s" % free
+    print "used:%s" % total
+    print "total:%s" % total
+    if free < 200:
+        print "Insufficient disk space"
+        raise MemoryError
+
     Utility.create_folder(workspace_path)
     os.chdir(workspace_path)
 
