@@ -4,3 +4,15 @@ Jobs = {
     "BSP_NightlyBuild": "BSP_NightlyBuild"
 
 }
+People = {
+    "mingchaohu": {
+        "name": u"",
+        "mail": u"",
+
+    },
+    "qingjunwang": {
+        "name": u"",
+        "mail": u"",
+
+    },
+}

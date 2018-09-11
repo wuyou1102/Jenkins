@@ -43,11 +43,9 @@ def create_release_notes():
     deploy_path = Utility.get_deploy_path()
     os.chdir(compiler_path)
     since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 3)
-    lines = os.popen(Utility.Repo.log(since=since)).readlines()
+    output = os.popen(Utility.Repo.log(since=since)).read()
     with open(os.path.join(deploy_path, "ReleaseNotes.txt"), "w") as wfile:
-        for line in lines:
-            print line
-            wfile.write(line + '\n')
+        wfile.write(output)
 
 
 def run(*args, **kwargs):
@@ -61,7 +59,3 @@ def run(*args, **kwargs):
     else:
         print "Can not find out file."
         raise IOError
-
-
-if __name__ == '__main__':
-    run()

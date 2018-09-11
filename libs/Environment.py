@@ -3,7 +3,7 @@ import os
 import time
 
 environ = os.environ
-__debug = True
+__debug = False
 __timestamp = "20180911.122335"
 
 
