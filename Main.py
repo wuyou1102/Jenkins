@@ -6,23 +6,6 @@ import sys
 
 Job = Get_Python_Job(Cfg.Jobs.get(Env.JOB_NAME))
 
-
-def checkout():
-    Job.checkout()
-
-
-def test():
-    Job.test()
-
-
-def build():
-    Job.build()
-
-
-def deploy():
-    Job.deploy
-
-
 switch = {
     "checkout": Job.checkout,
     "test": Job.test,
