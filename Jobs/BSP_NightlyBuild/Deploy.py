@@ -13,17 +13,36 @@ def get_output_path():
     return None
 
 
+def copy_binary_to_deploy(src_folder, dst_folder):
+    Utility.create_folder(dst_folder)
+    for f in os.listdir(src_folder):
+        src = os.path.join(src_folder, f)
+        dst = os.path.join(dst_folder, f)
+        print "Copy \"%s\" to \"%s\"" % (src, dst)
+        shutil.copyfile(src=src, dst=dst)
+
+
+def copy_debug_info_to_deploy(src_folder, dst_folder):
+    Utility.create_folder(dst_folder)
+    src_folder = os.path.join(src_folder, 'obj', 'kernel', 'msm-4.4')
+    for f in ['vmlinux', 'System.map']:
+        src = os.path.join(src_folder, f)
+        dst = os.path.join(dst_folder, f)
+        print "Copy \"%s\" to \"%s\"" % (src, dst)
+        shutil.copyfile(src=src, dst=dst)
+
+
+def create_release_notes(path):
+    pass
+
+
 def run(*args, **kwargs):
     Utility.print_info(__file__, *args, **kwargs)
     output_path = get_output_path()
     if output_path:
         deploy_path = Utility.get_deploy_path()
-        Utility.create_folder(deploy_path)
-        for f in os.listdir(output_path):
-            src = os.path.join(output_path, f)
-            dst = os.path.join(deploy_path, f)
-            print "Copy \"%s\" to \"%s\"" % (src, dst)
-            shutil.copyfile(src=src, dst=dst)
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'Binary'))
+        copy_debug_info_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'DebugInfo'))
     else:
         print "Can not find out file."
         raise IOError
