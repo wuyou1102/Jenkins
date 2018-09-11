@@ -8,7 +8,7 @@ def get_output_path():
     compiler_path = Utility.get_compiler_path()
     output_path = os.path.join(compiler_path, 'out', 'target', 'product', 'g2')
     for folder in os.listdir(output_path):
-        if "g2-" in folder:
+        if "g2-userdebug-" in folder:
             return os.path.join(output_path, folder)
     return None
 
