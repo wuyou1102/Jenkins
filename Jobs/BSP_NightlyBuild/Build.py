@@ -1,12 +1,12 @@
 from libs import Utility
 import os
+import JobFunc
 
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     workspace_path = Utility.get_compiler_path()
     os.chdir(workspace_path)
-
     envsetup_command = "source build/envsetup.sh"
     link_command = "source build/link.sh"
     lunch_command = "lunch g2-userdebug general"
@@ -23,7 +23,6 @@ def run(*args, **kwargs):
         make_command
     ]
     command = " && ".join(commands)
-
     command_exit_code = Utility.execute_command(cmd=command)
     if command_exit_code != 0:
-        raise IOError
+        JobFunc.RaiseException(IOError, "Build Error")

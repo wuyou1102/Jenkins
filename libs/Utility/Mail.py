@@ -11,15 +11,16 @@ class Mail(object):
         self.user = "SP_Jenkins"
         self.password = "Password01"
         self.port = 465
+        self._type = "plain"
         self.subject = ""
         self.content = ""
-        self.receiver = ['you.wu@sensethink.cn']
+        self.receiver = ['you.wu@sensethink.cn', 'wei.cheng@sensethink.com']
 
     def send(self):
         try:
             smtp = smtplib.SMTP_SSL(self.host, port=self.port)
             smtp.login(self.user, self.password)
-            msg = MIMEText(self.content, "plain", 'utf-8')
+            msg = MIMEText(self.content, self._type, 'utf-8')
             msg["Subject"] = Header(self.subject, 'utf-8')
             msg["From"] = self.sender
             msg["To"] = ','.join(self.receiver)
@@ -31,7 +32,8 @@ class Mail(object):
     def add_subject(self, subject):
         self.subject = subject
 
-    def add_content(self, content):
+    def add_content(self, content, _type="plain"):
+        self._type = _type if _type.lower() in ["plain", "html"] else "plain"
         self.content = content
 
     def add_receiver(self, *receiver):

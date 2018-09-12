@@ -3,6 +3,7 @@ import os
 from libs import Environment as Env
 from libs import Utility
 import shutil
+import JobFunc
 
 
 def get_output_path():
@@ -56,6 +57,6 @@ def run(*args, **kwargs):
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'Binary'))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, 'DebugInfo'))
         create_release_notes()
+        JobFunc.SendJobFinishMail()
     else:
-        print "Can not find out file."
-        raise IOError
+        JobFunc.RaiseException(IOError, "Can not find out file.")
