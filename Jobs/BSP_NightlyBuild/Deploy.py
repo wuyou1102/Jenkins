@@ -6,10 +6,18 @@ import shutil
 import JobFunc
 
 
-def get_output_path():
+def get_userdebug_path():
     out_path = get_out_path()
     for folder in os.listdir(out_path):
         if "g2-userdebug-" in folder:
+            return os.path.join(out_path, folder)
+    return None
+
+
+def get_user_path():
+    out_path = get_out_path()
+    for folder in os.listdir(out_path):
+        if "g2-user-" in folder:
             return os.path.join(out_path, folder)
     return None
 
@@ -51,12 +59,26 @@ def create_release_notes():
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, *args, **kwargs)
-    output_path = get_output_path()
+    deploy_userdebug_version()
+    deploy_user_version()
+    create_release_notes()
+    JobFunc.SendJobFinishMail()
+
+
+def deploy_userdebug_version():
+    output_path = get_userdebug_path()
     if output_path:
         deploy_path = Utility.get_deploy_path()
-        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'Binary'))
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'UserDebug'))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, 'DebugInfo'))
-        create_release_notes()
-        JobFunc.SendJobFinishMail()
+    else:
+        JobFunc.RaiseException(IOError, "Can not find out file.")
+
+
+def deploy_user_version():
+    output_path = get_user_path()
+    if output_path:
+        deploy_path = Utility.get_deploy_path()
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, 'User'))
     else:
         JobFunc.RaiseException(IOError, "Can not find out file.")
