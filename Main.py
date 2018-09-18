@@ -5,6 +5,9 @@ from Jobs import Get_Python_Job
 import sys
 
 Job = Get_Python_Job(Cfg.Jobs.get(Env.JOB_NAME))
+from Jobs import BSP_NightlyBuild
+
+Job = BSP_NightlyBuild
 
 switch = {
     "checkout": Job.checkout,
@@ -15,4 +18,4 @@ switch = {
 
 if __name__ == '__main__':
     stage = sys.argv[1].lower()
-    switch.get(stage)()
+    switch.get(stage)(*sys.argv)

@@ -5,8 +5,14 @@ import JobFunc
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
-    build_user()
-    build_userdebug()
+    version_type = args[2]
+    remove_out_folder()
+    if version_type == "UserDebug":
+        build_userdebug()
+    elif version_type == "User":
+        build_user()
+    else:
+        JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
 
 
 def build_userdebug():
@@ -55,3 +61,10 @@ def build_user():
     command_exit_code = Utility.execute_command(cmd=command)
     if command_exit_code != 0:
         JobFunc.RaiseException(IOError, "Build Error")
+
+
+def remove_out_folder():
+    workspace_path = Utility.get_compiler_path()
+    out_folder = os.path.join(workspace_path, "out")
+    if os.path.exists(out_folder):
+        os.remove(out_folder)
