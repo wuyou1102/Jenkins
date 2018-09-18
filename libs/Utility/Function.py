@@ -6,12 +6,18 @@ import psutil
 
 
 def get_compiler_path():
-    version_name = "%s_%s" % (Env.PROGRAM_NAME, Env.BUILD_TIMESTAMP)
+    if Env.VERSION_TYPE is not None:
+        version_name = "%s_%s_%s" % (Env.PROGRAM_NAME, Env.VERSION_TYPE, Env.BUILD_TIMESTAMP)
+    else:
+        version_name = "%s_%s" % (Env.PROGRAM_NAME, Env.BUILD_TIMESTAMP)
     return os.path.join(Env.COMPILER_FOLDER, version_name)
 
 
 def get_deploy_path():
-    version_name = "%s_%s" % (Env.PROGRAM_NAME, Env.BUILD_TIMESTAMP)
+    if Env.VERSION_TYPE is not None:
+        version_name = "%s_%s_%s" % (Env.PROGRAM_NAME, Env.VERSION_TYPE, Env.BUILD_TIMESTAMP)
+    else:
+        version_name = "%s_%s" % (Env.PROGRAM_NAME, Env.BUILD_TIMESTAMP)
     return os.path.join(Env.DEPLOY_FOLDER, version_name)
 
 

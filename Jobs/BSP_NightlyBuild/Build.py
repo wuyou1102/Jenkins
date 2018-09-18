@@ -1,6 +1,7 @@
 from libs import Utility
 import os
 import JobFunc
+import shutil
 
 
 def run(*args, **kwargs):
@@ -67,4 +68,4 @@ def remove_out_folder():
     workspace_path = Utility.get_compiler_path()
     out_folder = os.path.join(workspace_path, "out")
     if os.path.exists(out_folder):
-        os.removedirs(out_folder)
+        shutil.rmtree(out_folder)
