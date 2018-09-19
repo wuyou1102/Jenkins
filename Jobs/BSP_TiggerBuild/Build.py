@@ -9,9 +9,9 @@ def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     version_type = Env.VERSION_TYPE
     remove_out_folder()
-    if version_type == "UserDebug":
+    if version_type == "userdebug":
         build_userdebug()
-    elif version_type == "User":
+    elif version_type == "user":
         build_user()
     else:
         JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
