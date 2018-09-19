@@ -5,9 +5,7 @@ from Jobs import Get_Python_Job
 import sys
 
 Job = Get_Python_Job(Cfg.Jobs.get(Env.JOB_NAME))
-from Jobs import BSP_NightlyBuild
 
-Job = BSP_NightlyBuild
 
 switch = {
     "checkout": Job.checkout,

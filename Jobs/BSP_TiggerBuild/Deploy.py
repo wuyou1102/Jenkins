@@ -59,10 +59,10 @@ def create_release_notes():
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, *args, **kwargs)
-    version_type = args[2]
-    if version_type == "UserDebug":
+    version_type = Env.VERSION_TYPE
+    if version_type == "userdebug":
         deploy_userdebug_version()
-    elif version_type == "User":
+    elif version_type == "user":
         deploy_user_version()
     else:
         JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
@@ -80,9 +80,8 @@ def deploy_userdebug_version():
     output_path = get_userdebug_path()
     if output_path:
         deploy_path = Utility.get_deploy_path()
-        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, userdebug, binary))
-        copy_debug_info_to_deploy(src_folder=get_out_path(),
-                                  dst_folder=os.path.join(deploy_path, userdebug, debuginfo))
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary))
+        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo))
     else:
         JobFunc.RaiseException(IOError, "Can not find out file.")
 
@@ -91,7 +90,7 @@ def deploy_user_version():
     output_path = get_user_path()
     if output_path:
         deploy_path = Utility.get_deploy_path()
-        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, user, binary))
-        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, user, debuginfo))
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary))
+        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo))
     else:
         JobFunc.RaiseException(IOError, "Can not find out file.")
