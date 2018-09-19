@@ -125,8 +125,13 @@ def get_disk_usage(path):
     return free, used, total
 
 
+def zip_folder(path):
+    if path.endswith('/'):
+        path.rstrip('/')
+    p, f = os.path.split(path)
+    os.chdir(p)
+    execute_command("zip -r %s.zip %s" % (f, f))
+
+
 if __name__ == '__main__':
-    free, used, total = get_disk_usage("C:\\")
-    print 43 > free
-    print 43 == free
-    print 43 < free
+    zip_folder("/home/bspserver/sda/C2_DailyBuild/C2_20180919.050000/UserDebug")
