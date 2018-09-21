@@ -51,7 +51,7 @@ def create_release_notes():
     compiler_path = Utility.get_compiler_path()
     deploy_path = Utility.get_deploy_path()
     os.chdir(compiler_path)
-    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 3)
+    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
     output = os.popen(Utility.Repo.log(since=since)).read()
     with open(os.path.join(deploy_path, "ReleaseNotes.txt"), "w") as wfile:
         wfile.write(output)
