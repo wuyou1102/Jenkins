@@ -14,7 +14,7 @@ class Mail(object):
         self._type = "plain"
         self.subject = ""
         self.content = ""
-        self.receiver = ['you.wu@sensethink.cn', 'wei.cheng@sensethink.com']
+        self.receiver = ['you.wu@sensethink.cn']
 
     def send(self):
         try:
