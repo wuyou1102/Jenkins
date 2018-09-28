@@ -47,13 +47,13 @@ def copy_debug_info_to_deploy(src_folder, dst_folder):
         shutil.copyfile(src=src, dst=dst)
 
 
-def create_release_notes():
+def create_commit_history():
     compiler_path = Utility.get_compiler_path()
     deploy_path = Utility.get_deploy_path()
     os.chdir(compiler_path)
     since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 3)
     output = os.popen(Utility.Repo.log(since=since)).read()
-    with open(os.path.join(deploy_path, "ReleaseNotes.txt"), "w") as wfile:
+    with open(os.path.join(deploy_path, "CommitHistory.txt"), "w") as wfile:
         wfile.write(output)
 
 
@@ -66,7 +66,7 @@ def run(*args, **kwargs):
         deploy_user_version()
     else:
         JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
-    create_release_notes()
+    create_commit_history()
     JobFunc.SendJobFinishMail()
 
 
