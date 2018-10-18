@@ -9,7 +9,7 @@ def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     version_type = args[2]
     if version_type == "P0":
-        build_p0
+        build_p0()
     elif version_type == "P1":
         build_p1()
     else:
