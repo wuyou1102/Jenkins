@@ -1,3 +1,3 @@
 # -*- encoding:UTF-8 -*-
-from Checkout import run as checkout
+from Deploy import run as Deploy
 from Build import run as build
