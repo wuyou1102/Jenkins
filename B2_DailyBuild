@@ -2,10 +2,10 @@ node {
     try {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Build P0') {
-                sh "python Main.py Build P0"
+                bash "python Main.py Build P0"
             }
             stage('Deploy P0') {
-                sh "python Main.py Deploy P0"
+                bash "python Main.py Deploy P0"
             }
             stage('Build P1') {
                 sh "python Main.py Build P1"
