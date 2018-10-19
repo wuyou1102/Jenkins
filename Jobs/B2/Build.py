@@ -59,6 +59,6 @@ def change_permission(path):
 
 
 def execute_script(script):
-    command_exit_code = Utility.execute_command(cmd="source %s" % script)
+    command_exit_code = Utility.execute_command(cmd="./%s" % script)
     if command_exit_code != 0:
         raise IOError
