@@ -1,5 +1,6 @@
 node {
     try {
+        environment {PATH = "/usr/sbin:$PATH"}
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Build P0') {
                 sh "python Main.py Build P0"
