@@ -32,6 +32,9 @@ def remove_folder():
     src_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, "9201")
     if os.path.exists(src_folder):
         shutil.rmtree(src_folder)
+    command_exit_code = Utility.execute_command(cmd="$PATH")
+    if command_exit_code != 0:
+        raise IOError
 
 
 def git_clone():
