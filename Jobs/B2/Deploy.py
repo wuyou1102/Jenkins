@@ -30,11 +30,11 @@ def deploy_p1():
 def copy_image(_type):
     u_disk = 'artosyn-upgrade-B2%sU.' % _type
     full = 'B2%sF.' % _type
-    dst_folder = Utility.create_folder(os.path.join(JobFunc.PATH_DAILY_BUILD, Env.BUILD_TIMESTAMP, _type))
+    dst_folder = Utility.create_folder(os.path.join(JobFunc.PATH_DAILY_BUILD, Env.BUILD_TIMESTAMP))
     for f in os.listdir(output_folder):
         if f.startswith(full):
             shutil.copy(src=os.path.join(output_folder, f), dst=os.path.join(dst_folder, "B2%sF.img" % _type))
         elif f.startswith(u_disk):
             shutil.copy(src=os.path.join(output_folder, f), dst=os.path.join(dst_folder, "B2%sU.img" % _type))
         else:
-            pass
+            print "wuyou debug:->%s" % f
