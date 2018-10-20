@@ -45,9 +45,11 @@ def copy_image(_type):
 
 def create_commit_history(deploy_path):
     commit_history = os.path.join(deploy_path, "CommitHistory.txt")
-    if os.path.exists(commit_history):
-        return True
-    os.chdir(src_folder)
-    output = os.popen('git log --since=1.day').read()
-    with open(commit_history, "w") as wfile:
-        wfile.write(str(output))
+    print "wuyou debug:-> %s" % commit_history
+    if not os.path.exists(commit_history):
+        print "wuyou debug:-> not exists commit history"
+        os.chdir(src_folder)
+        output = os.popen('git log --since=1.day').read()
+        print "wuyou debug:-> %s" % output
+        with open(commit_history, "w") as wfile:
+            wfile.write(str(output))
