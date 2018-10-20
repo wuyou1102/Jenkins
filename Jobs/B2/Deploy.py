@@ -5,6 +5,7 @@ from libs import Utility
 import shutil
 import JobFunc
 
+src_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, '9201')
 output_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, "9201", "output", "image")
 
 
@@ -39,3 +40,14 @@ def copy_image(_type):
             shutil.copy(src=os.path.join(output_folder, f), dst=os.path.join(dst_folder, "B2%sU.img" % _type))
         else:
             print "wuyou debug:->%s" % f
+    create_commit_history(deploy_path=dst_folder)
+
+
+def create_commit_history(deploy_path):
+    commit_history = os.path.join(deploy_path, "CommitHistory.txt")
+    if os.path.exists(commit_history):
+        return True
+    os.chdir(src_folder)
+    output = os.popen('git log --since=1.day').read()
+    with open(commit_history, "w") as wfile:
+        wfile.write(str(output))
