@@ -5,5 +5,6 @@ import sys
 
 if __name__ == '__main__':
     Job = Get_Python_Job(Env.JOB_NAME)
+    print Job
     stage = getattr(Job, sys.argv[1].lower())
     stage(*sys.argv)
