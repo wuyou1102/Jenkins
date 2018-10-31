@@ -2,8 +2,8 @@
 
 def Get_Python_Job(JobName=None):
     if JobName == "BSP_NightlyBuild":
-        import BSP_NightlyBuild
-        return BSP_NightlyBuild
+        import C2
+        return C2
     elif JobName == "BSP_TiggerBuild":
         import BSP_TiggerBuild
         return BSP_TiggerBuild
