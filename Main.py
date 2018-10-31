@@ -1,6 +1,5 @@
 # -*- encoding:UTF-8 -*-
 from libs import Environment as Env
-from libs import Configuration as Cfg
 from Jobs import Get_Python_Job
 import sys
 
