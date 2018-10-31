@@ -1,2 +1,3 @@
-def test():
-    print 'ssss'
+class Job(object):
+    def __init__(self):
+        pass

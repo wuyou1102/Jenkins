@@ -2,17 +2,17 @@
 
 def Get_Python_Job(JobName=None):
     if JobName == "BSP_NightlyBuild":
-        import C2
-        return C2
+        from C2 import Job
+        return Job
     elif JobName == "BSP_TiggerBuild":
         import BSP_TiggerBuild
         return BSP_TiggerBuild
     elif JobName == "B2_DailyBuild":
-        import B2
-        return B2
+        from B2 import Job
+        return Job
     elif JobName == "C2_CleanupSourceCode":
-        import C2
-        return C2
+        from C2 import Job
+        return Job
     else:
-        import Default
-        return Default
+        from Default import Job
+        return Job
