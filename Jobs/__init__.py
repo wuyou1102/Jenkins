@@ -10,6 +10,9 @@ def Get_Python_Job(JobName=None):
     elif JobName == "B2_DailyBuild":
         import B2
         return B2
+    elif JobName == "C2_CleanupSourceCode":
+        import C2
+        return C2
     else:
         import Default
         return Default

@@ -1,0 +1,12 @@
+node {
+    try {
+        dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
+            stage('Cleanup') {
+                sh "python Main.py cleanup"
+            }
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
+    }
+}
