@@ -8,6 +8,7 @@ DAILY_PATH = "/home/bspserver/sda/C2_DailyBuild/"
 
 def run(*args, **kwargs):
     remove_empty_commit_history()
+    remove_oldest_version()
 
 
 def remove_empty_commit_history():
@@ -17,7 +18,13 @@ def remove_empty_commit_history():
             with open(commit_history) as r_file:
                 commit = r_file.read()
                 if not commit:
-                    print f
+                    remove_src_folder(f)
+
+
+def remove_src_folder(folder_name):
+    folder_path = os.path.join(SOURCE_CODE_PATH, folder_name)
+    if os.path.exists(folder_path):
+        print folder_path
 
 
 def remove_oldest_version():
@@ -27,6 +34,8 @@ def remove_oldest_version():
         print "used:%s" % used
         print "total:%s" % total
         if free < 500:
-            print 'I will remove the ol'
+            f_list = os.listdir(SOURCE_CODE_PATH)
+            f_list.sort()
+            print f_list
         else:
             print 'Space is enough.'
