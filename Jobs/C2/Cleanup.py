@@ -12,10 +12,12 @@ def run(*args, **kwargs):
 
 def remove_empty_commit_history():
     for f in os.listdir(DAILY_PATH):
-        commit_history = os.path.join(DAILY_PATH, f, "ReleaseNotes.txt")
+        commit_history = os.path.join(DAILY_PATH, f, "CommitHistory.txt")
         if os.path.exists(commit_history):
             with open(commit_history) as r_file:
-                print r_file.read()
+                commit = r_file.read()
+                if not commit:
+                    print f
 
 
 def remove_oldest_version():
