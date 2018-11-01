@@ -1,6 +1,7 @@
 # -*- encoding:UTF-8 -*-
 from libs import Utility
 import os
+import shutil
 
 SOURCE_CODE_PATH = "/home/bspserver/sda/C2_SourceCode/"
 DAILY_PATH = "/home/bspserver/sda/C2_DailyBuild/"
@@ -36,8 +37,13 @@ def remove_oldest_version():
         if free < 950:
             f_list = os.listdir(SOURCE_CODE_PATH)
             f_list.sort()
+            oldest_folder = f_list[0]
+            oldest_folder_path = os.path.join(SOURCE_CODE_PATH, oldest_folder)
+            print 'I find %s is the oldest.' % oldest_folder
             print f_list
-            break
+            print 'I will remove \"%s\"' % oldest_folder_path
+            shutil.rmtree(oldest_folder_path)
+
         else:
             print 'Space is enough.'
             break
