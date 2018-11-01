@@ -33,9 +33,11 @@ def remove_oldest_version():
         print "free:%s" % free
         print "used:%s" % used
         print "total:%s" % total
-        if free < 500:
+        if free < 950:
             f_list = os.listdir(SOURCE_CODE_PATH)
             f_list.sort()
             print f_list
+            break
         else:
             print 'Space is enough.'
+            break
