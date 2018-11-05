@@ -54,8 +54,10 @@ def check_commit_history(path):
     output = os.popen(Utility.Repo.log(since=since)).read()
     if output:
         ConsolePrint.info(output)
-        pass
+        raise Exception
+
     else:
         ConsolePrint.info("No commit submitted in the last day ")
         cleanup_repo(path=path)
+        Env.update("Skip", "True")
         sys.exit(0)

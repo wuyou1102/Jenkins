@@ -2,12 +2,7 @@ node {
     try {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout') {
-                sh "python Main.py Checkout"
-                if (env.BRANCH_NAME == 'master') {
-
-                } else {
-
-                }
+                sh "python Main.py Checkout Daily"
             }
             stage('Build User') {
                 sh "python Main.py Build User"
