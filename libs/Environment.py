@@ -12,9 +12,6 @@ def get(attr_name):
     return environ.get(key=attr_name, failobj=None)
 
 
-def update(attr_name, attr_value):
-    environ.update(dict={attr_name: attr_value})
-
 
 COMPILER_FOLDER = get('COMPILER_FOLDER')  # 编译目录
 DEPLOY_FOLDER = get('DEPLOY_FOLDER')  # 发布目录

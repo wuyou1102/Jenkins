@@ -7,10 +7,7 @@ from libs import Environment as Env
 def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     version_type = args[2]
-    print Env.get("Skip")
-    if Env.get("Skip") == "True":
-        import sys
-        sys.exit(0)
+
     remove_out_folder()
     if version_type == "UserDebug":
         build_userdebug()

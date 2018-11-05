@@ -59,9 +59,6 @@ def create_commit_history():
 
 def run(*args, **kwargs):
 
-    if Env.get("Skip") == "True":
-        import sys
-        sys.exit(0)
     Utility.print_info(__file__, *args, **kwargs)
     version_type = args[2]
     if version_type == "UserDebug":

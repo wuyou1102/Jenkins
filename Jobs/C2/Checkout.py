@@ -50,14 +50,18 @@ def cleanup_repo(path):
 
 def check_commit_history(path):
     os.chdir(path)
-    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
+    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 20)
     output = os.popen(Utility.Repo.log(since=since)).read()
     if output:
         ConsolePrint.info(output)
-        raise Exception
-
+        create_deploy_folder(path=Path.DAILY_DEPLOY, commit_msg=output)
     else:
         ConsolePrint.info("No commit submitted in the last day ")
         cleanup_repo(path=path)
-        Env.update("Skip", "True")
         sys.exit(0)
+
+
+def create_deploy_folder(path, commit_msg):
+    Utility.create_folder(path=path)
+    with open(os.path.join(path, "CommitHistory.txt"), "w") as wfile:
+        wfile.write(commit_msg)
