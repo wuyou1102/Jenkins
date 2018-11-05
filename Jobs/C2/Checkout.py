@@ -14,6 +14,7 @@ def run(*args, **kwargs):
     Utility.create_folder(workspace_path)
     check_space_available(path=workspace_path)
     init_repo(path=workspace_path)
+    get_commit_history(path=workspace_path)
     sync_repo(path=workspace_path)
 
 
