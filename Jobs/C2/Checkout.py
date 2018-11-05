@@ -13,8 +13,8 @@ def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     check_space_available(path=Path.COMPILER_PATH)  # 检查硬盘空间是否充足
     init_repo(path=Path.COMPILER_PATH)  # 初始化 repo
-    check_commit_history(path=Path.COMPILER_PATH)  # 检查是否有最新的提交记录
     sync_repo(path=Path.COMPILER_PATH)  # 同步 repo
+    check_commit_history(path=Path.COMPILER_PATH)  # 检查是否有最新的提交记录
 
 
 def check_space_available(path):
@@ -58,7 +58,6 @@ def check_commit_history(path):
     else:
         ConsolePrint.info("No commit submitted in the last day ")
         cleanup_repo(path=path)
-        sys.exit(0)
 
 
 def create_deploy_folder(path, commit_msg):
