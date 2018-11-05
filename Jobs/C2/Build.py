@@ -2,12 +2,12 @@ from libs import Utility
 import os
 import JobFunc
 import shutil
-from libs import Environment as Env
+from Config import Path
+
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
     version_type = args[2]
-
     remove_out_folder()
     if version_type == "UserDebug":
         build_userdebug()
@@ -18,7 +18,7 @@ def run(*args, **kwargs):
 
 
 def build_userdebug():
-    workspace_path = Utility.get_compiler_path()
+    workspace_path = Path.COMPILER_PATH
     os.chdir(workspace_path)
     envsetup_command = "source build/envsetup.sh"
     link_command = "source build/link.sh"
@@ -42,7 +42,7 @@ def build_userdebug():
 
 
 def build_user():
-    workspace_path = Utility.get_compiler_path()
+    workspace_path = Path.COMPILER_PATH
     os.chdir(workspace_path)
     envsetup_command = "source build/envsetup.sh"
     link_command = "source build/link.sh"
@@ -66,7 +66,7 @@ def build_user():
 
 
 def remove_out_folder():
-    workspace_path = Utility.get_compiler_path()
+    workspace_path = Path.COMPILER_PATH
     out_folder = os.path.join(workspace_path, "out")
     if os.path.exists(out_folder):
         shutil.rmtree(out_folder)

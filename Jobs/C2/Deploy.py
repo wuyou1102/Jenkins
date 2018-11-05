@@ -4,6 +4,7 @@ from libs import Environment as Env
 from libs import Utility
 import shutil
 import JobFunc
+from Config import Path
 
 
 def get_userdebug_path():
@@ -23,7 +24,7 @@ def get_user_path():
 
 
 def get_out_path():
-    compiler_path = Utility.get_compiler_path()
+    compiler_path = Path.COMPILER_PATH
     out_path = os.path.join(compiler_path, 'out', 'target', 'product', 'g2')
     return out_path
 
@@ -47,18 +48,8 @@ def copy_debug_info_to_deploy(src_folder, dst_folder):
         shutil.copyfile(src=src, dst=dst)
 
 
-def create_commit_history():
-    compiler_path = Utility.get_compiler_path()
-    deploy_path = Utility.get_deploy_path()
-    os.chdir(compiler_path)
-    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
-    output = os.popen(Utility.Repo.log(since=since)).read()
-    with open(os.path.join(deploy_path, "CommitHistory.txt"), "w") as wfile:
-        wfile.write(output)
-
 
 def run(*args, **kwargs):
-
     Utility.print_info(__file__, *args, **kwargs)
     version_type = args[2]
     if version_type == "UserDebug":
@@ -67,7 +58,6 @@ def run(*args, **kwargs):
         deploy_user_version()
     else:
         JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
-    create_commit_history()
     JobFunc.SendJobFinishMail()
 
 
@@ -80,7 +70,7 @@ debuginfo = 'DebugInfo'
 def deploy_userdebug_version():
     output_path = get_userdebug_path()
     if output_path:
-        deploy_path = Utility.get_deploy_path()
+        deploy_path = Path.DAILY_DEPLOY()
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, userdebug))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, userdebug))
         Utility.zip_folder(os.path.join(deploy_path, binary, userdebug))
@@ -92,7 +82,7 @@ def deploy_userdebug_version():
 def deploy_user_version():
     output_path = get_user_path()
     if output_path:
-        deploy_path = Utility.get_deploy_path()
+        deploy_path = Path.DAILY_DEPLOY()
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, user))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, user))
         Utility.zip_folder(os.path.join(deploy_path, binary, user))
