@@ -7,6 +7,9 @@ from Config import Path
 
 def run(*args, **kwargs):
     Utility.print_info(__file__, args, kwargs)
+    if not os.path.exists(Path.COMPILER_PATH):
+        import sys
+        sys.exit(0)
     version_type = args[2]
     remove_out_folder()
     if version_type == "UserDebug":

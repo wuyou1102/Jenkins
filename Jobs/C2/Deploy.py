@@ -48,9 +48,11 @@ def copy_debug_info_to_deploy(src_folder, dst_folder):
         shutil.copyfile(src=src, dst=dst)
 
 
-
 def run(*args, **kwargs):
     Utility.print_info(__file__, *args, **kwargs)
+    if not os.path.exists(Path.COMPILER_PATH):
+        import sys
+        sys.exit(0)
     version_type = args[2]
     if version_type == "UserDebug":
         deploy_userdebug_version()
