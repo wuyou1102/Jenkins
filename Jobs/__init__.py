@@ -1,7 +1,7 @@
 # -*- encoding:UTF-8 -*-
 
 def Get_Python_Job(JobName=None):
-    if JobName == "BSP_NightlyBuild":
+    if JobName == "C2_DailyBuild":
         import C2
         return C2
     elif JobName == "BSP_TiggerBuild":
