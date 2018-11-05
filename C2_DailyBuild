@@ -9,19 +9,19 @@ node {
 
                 }
             }
-
-            stage('Build UserDebug') {
-                sh "python Main.py Build UserDebug"
-            }
-            stage('Deploy UserDebug') {
-                sh "python Main.py Deploy UserDebug"
-            }
             stage('Build User') {
                 sh "python Main.py Build User"
             }
             stage('Deploy User') {
                 sh "python Main.py Deploy User"
             }
+            stage('Build UserDebug') {
+                sh "python Main.py Build UserDebug"
+            }
+            stage('Deploy UserDebug') {
+                sh "python Main.py Deploy UserDebug"
+            }
+
         }
     } catch (err) {
         currentBuild.result = 'FAILED'

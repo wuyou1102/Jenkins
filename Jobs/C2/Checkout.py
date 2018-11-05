@@ -5,20 +5,20 @@ from libs.Utility import ConsolePrint
 from libs import Environment as Env
 from Config import Path
 import JobFunc
+import sys
 
 
 def run(*args, **kwargs):
     JobFunc.SendJobStartMail()
     Utility.print_info(__file__, args, kwargs)
-    workspace_path = Utility.get_compiler_path()
-    Utility.create_folder(workspace_path)
-    check_space_available(path=workspace_path)
-    init_repo(path=workspace_path)
-    get_commit_history(path=workspace_path)
-    sync_repo(path=workspace_path)
+    check_space_available(path=Path.COMPILER_PATH)  # 检查硬盘空间是否充足
+    init_repo(path=Path.COMPILER_PATH)  # 初始化 repo
+    check_commit_history(path=Path.COMPILER_PATH)  # 检查是否有最新的提交记录
+    sync_repo(path=Path.COMPILER_PATH)  # 同步 repo
 
 
 def check_space_available(path):
+    Utility.create_folder(path)
     free, used, total = Utility.get_disk_usage(path)
     ConsolePrint.info("free:%s" % free)
     ConsolePrint.info("used:%s" % used)
@@ -43,13 +43,19 @@ def sync_repo(path):
         JobFunc.RaiseException(IOError, "Repo sync error")
 
 
-def get_commit_history(path):
+def cleanup_repo(path):
+    import shutil
+    shutil.rmtree(path)
+
+
+def check_commit_history(path):
     os.chdir(path)
     since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
     output = os.popen(Utility.Repo.log(since=since)).read()
     if output:
         ConsolePrint.info(output)
-        raise IOError
+        pass
     else:
         ConsolePrint.info("No commit submitted in the last day ")
-        raise IOError
+        cleanup_repo(path=path)
+        sys.exit(0)

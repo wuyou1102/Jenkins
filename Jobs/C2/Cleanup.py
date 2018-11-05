@@ -1,10 +1,11 @@
 # -*- encoding:UTF-8 -*-
 from libs import Utility
+from Config import Path
 import os
 import shutil
 
-SOURCE_CODE_PATH = "/home/bspserver/sda/C2_SourceCode/"
-DAILY_PATH = "/home/bspserver/sda/C2_DailyBuild/"
+SOURCE_CODE_PATH = Path.__SOURCE_PATH
+DAILY_PATH = Path.__DAILY_PATH
 
 
 def run(*args, **kwargs):
