@@ -2,6 +2,7 @@
 import os
 from libs import Utility
 from libs.Utility import ConsolePrint
+from libs import Environment as Env
 from Config import Path
 import JobFunc
 
@@ -39,3 +40,15 @@ def sync_repo(path):
     repo_sync_exit_code = Utility.execute_command(repo_sync_command)
     if repo_sync_exit_code != 0:
         JobFunc.RaiseException(IOError, "Repo sync error")
+
+
+def get_commit_history(path):
+    os.chdir(path)
+    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
+    output = os.popen(Utility.Repo.log(since=since)).read()
+    if output:
+        ConsolePrint.info(output)
+        raise IOError
+    else:
+        ConsolePrint.info("No commit submitted in the last day ")
+        raise IOError
