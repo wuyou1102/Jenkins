@@ -1,5 +1,6 @@
 # -*- encoding:UTF-8 -*-
 from libs.Utility import Mail
+from libs.Utility import ConsolePrint
 from libs import Utility
 from libs import Environment as Env
 import sys
@@ -69,7 +70,6 @@ def SendJobFinishMail():
     mail.send()
 
 
-
 def SendJobErrorMail():
     mail = Mail.Mail()
     mail.add_receiver(*mail_list)
@@ -83,9 +83,8 @@ def SendJobErrorMail():
     mail.send()
 
 
-
 def RaiseException(error, msg):
-    print msg
+    ConsolePrint.error(msg=msg)
     SendJobErrorMail()
     raise error
 
