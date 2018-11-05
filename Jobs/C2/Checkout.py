@@ -52,8 +52,8 @@ def check_commit_history(path):
     os.chdir(path)
     since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 20)
     output = os.popen(Utility.Repo.log(since=since)).read()
+    ConsolePrint.info(output)
     if output:
-        ConsolePrint.info(output)
         create_deploy_folder(path=Path.DAILY_DEPLOY, commit_msg=output)
     else:
         ConsolePrint.info("No commit submitted in the last day ")
