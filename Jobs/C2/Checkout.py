@@ -26,3 +26,7 @@ def run(*args, **kwargs):
     repo_sync_exit_code = Utility.execute_command(repo_sync_command)
     if repo_sync_exit_code != 0:
         JobFunc.RaiseException(IOError, "Repo sync error")
+
+
+def check_space_available(path):
+    pass

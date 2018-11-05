@@ -3,7 +3,13 @@ node {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout') {
                 sh "python Main.py Checkout"
+                if (env.BRANCH_NAME == 'master') {
+
+                } else {
+
+                }
             }
+
             stage('Build UserDebug') {
                 sh "python Main.py Build UserDebug"
             }

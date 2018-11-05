@@ -2,6 +2,7 @@
 import os
 import subprocess
 from libs import Environment as Env
+import ConsolePrint
 import psutil
 
 
@@ -23,7 +24,7 @@ def get_deploy_path():
 
 def create_folder(path):
     if not os.path.exists(path):
-        print "Create New Folder: %s " % path
+        ConsolePrint.info("Create New Folder: %s " % path)
         os.makedirs(path)
     return path
 
@@ -40,12 +41,12 @@ def execute_command(cmd):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True)
     try:
         for line in iter(p.stdout.readline, b''):
-            print line.rstrip()
-    except Exception, e:
-        print e.message
+            ConsolePrint.info(line.rstrip())
+    except Exception:
+        ConsolePrint.traceback()
     finally:
         exit_code = p.wait()
-        print 'Executed command:\"%s\" and exit code is : \"%s\"' % (cmd, exit_code)
+        ConsolePrint.info('Executed command:\"%s\" and exit code is : \"%s\"' % (cmd, exit_code))
         return exit_code
 
 
