@@ -54,7 +54,8 @@ def check_commit_history(path):
     output = os.popen(Utility.Repo.log(since=since)).read()
     ConsolePrint.info(output)
     if output:
-        create_deploy_folder(path=Path.DAILY_DEPLOY, commit_msg=output)
+        version_number = create_deploy_folder(path=Path.DAILY_DEPLOY, commit_msg=output)
+        modify_src_version_number(path=path, version=version_number)
     else:
         ConsolePrint.info("No commit submitted in the last day ")
         cleanup_repo(path=path)
@@ -63,7 +64,7 @@ def check_commit_history(path):
 def create_deploy_folder(path, commit_msg):
     Utility.create_folder(path=path)
     write_commit_history(path=path, commit_msg=commit_msg)
-    generate_version_number(path=path)
+    return generate_version_number(path=path)
 
 
 def write_commit_history(path, commit_msg):
@@ -76,3 +77,17 @@ def generate_version_number(path):
     with open(os.path.join(path, "VersionNumber.txt"), "w") as wfile:
         wfile.write(JobFunc.parse_version_config())
     return True
+
+
+def modify_src_version_number(path, version):
+    version_file = os.path.join(path, 'build', 'make', 'core', 'version_defaults.mk')
+    with open(version_file) as old:
+        s = old.read()
+    with open(version_file + '1', 'w') as new:
+        s = s.replace('BUILD_NUMBER := eng.$(shell echo $${USER:0:6}).$(shell $(DATE) +%Y%m%d.%H%M%S)',
+                      'BUILD_NUMBER := %s' % version)
+        new.write(s)
+
+
+if __name__ == '__main__':
+    modify_src_version_number('ss', 'dddd')

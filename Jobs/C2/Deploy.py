@@ -72,7 +72,7 @@ debuginfo = 'DebugInfo'
 def deploy_userdebug_version():
     output_path = get_userdebug_path()
     if output_path:
-        deploy_path = Path.DAILY_DEPLOY()
+        deploy_path = Path.DAILY_DEPLOY
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, userdebug))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, userdebug))
         Utility.zip_folder(os.path.join(deploy_path, binary, userdebug))
@@ -84,7 +84,7 @@ def deploy_userdebug_version():
 def deploy_user_version():
     output_path = get_user_path()
     if output_path:
-        deploy_path = Path.DAILY_DEPLOY()
+        deploy_path = Path.DAILY_DEPLOY
         copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, user))
         copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, user))
         Utility.zip_folder(os.path.join(deploy_path, binary, user))

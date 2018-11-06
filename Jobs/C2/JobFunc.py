@@ -103,8 +103,8 @@ def parse_version_config(config_path=None):
     config['Edition'] = '{0:02d}'.format(int(config['Edition']))
     config['Release'] = '{0:02d}'.format(int(config['Release']))
     config['Internal'] = '{0:03d}'.format(int(config['Internal']) + 1)
-    version_name = "{p}-{h}-{m}-{r}".format(p=config['Project'], h=config['HW'], m=config['Market'],
-                                            r=config['Reserved'])
+    version_name = "{p}-{h}{m}-{r}".format(p=config['Project'], h=config['HW'], m=config['Market'],
+                                           r=config['Reserved'])
     version_number = '{e}.{r}.{i}'.format(e=config['Edition'], r=config['Release'], i=config['Internal'])
     version = '{name}-{number}'.format(name=version_name, number=version_number)
     with open(config_path, 'w') as new:
