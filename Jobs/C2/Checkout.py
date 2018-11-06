@@ -74,16 +74,17 @@ def write_commit_history(path, commit_msg):
 
 
 def generate_version_number(path):
+    version_number = JobFunc.parse_version_config()
     with open(os.path.join(path, "VersionNumber.txt"), "w") as wfile:
-        wfile.write(JobFunc.parse_version_config())
-    return True
+        wfile.write(version_number)
+    return version_number
 
 
 def modify_src_version_number(path, version):
     version_file = os.path.join(path, 'build', 'make', 'core', 'version_defaults.mk')
     with open(version_file) as old:
         s = old.read()
-    with open(version_file + '1', 'w') as new:
+    with open(version_file, 'w') as new:
         s = s.replace('BUILD_NUMBER := eng.$(shell echo $${USER:0:6}).$(shell $(DATE) +%Y%m%d.%H%M%S)',
                       'BUILD_NUMBER := %s' % version)
         new.write(s)
