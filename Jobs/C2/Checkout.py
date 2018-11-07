@@ -81,12 +81,12 @@ def generate_version_number(path):
 
 
 def modify_src_version_number(path, version):
-    version_file = os.path.join(path, 'build', 'make', 'core', 'version_defaults.mk')
+    version_file = os.path.join(path, 'build', 'make', 'core', 'build_id.mk')
     with open(version_file) as old:
         s = old.read()
     with open(version_file, 'w') as new:
-        s = s.replace('BUILD_NUMBER := eng.$(shell echo $${USER:0:6}).$(shell $(DATE) +%Y%m%d.%H%M%S)',
-                      'BUILD_NUMBER := %s' % version)
+        s = s.replace('export BUILD_ID=OPM1.171019.026',
+                      'export BUILD_ID=%s' % version)
         new.write(s)
 
 
