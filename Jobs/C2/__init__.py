@@ -4,4 +4,4 @@ from Build import run as build
 from Test import run as test
 from Deploy import run as deploy
 from Cleanup import run as cleanup
-
+from Release import run as release

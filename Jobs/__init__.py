@@ -13,6 +13,9 @@ def Get_Python_Job(JobName=None):
     elif JobName == "C2_CleanupSourceCode":
         import C2
         return C2
+    elif JobName == "C2_Release_WeeklyBuild":
+        import C2
+        return C2
     else:
         from Default import Job
         return Job

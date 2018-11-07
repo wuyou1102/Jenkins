@@ -1,0 +1,12 @@
+node {
+    try {
+        dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
+            stage('Release') {
+                sh "python Main.py Release"
+            }
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
+    }
+}
