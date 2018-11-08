@@ -8,7 +8,6 @@ __WEEKLY_PATH = '/home/bspserver/sda/C2_WeeklyBuild/'
 __TRIGGER_PATH = '/home/bspserver/sda/C2_TriggerBuild/'
 __CONFIG_PATH = '/home/bspserver/sda/VersionConfig/C2.txt'
 COMPILER_PATH = os.path.join(__SOURCE_PATH, Env.BUILD_TIMESTAMP)
-COMPILER_PATH = os.path.join(__SOURCE_PATH, "20181108.114048")
 DAILY_DEPLOY = os.path.join(__DAILY_PATH, Env.BUILD_TIMESTAMP)
 WEEKLY_DEPLOY = os.path.join(__WEEKLY_PATH, Env.BUILD_TIMESTAMP)
 TRIGGER_DEPLOY = os.path.join(__TRIGGER_PATH, Env.BUILD_TIMESTAMP)
