@@ -1,18 +1,7 @@
 node {
     try {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
-            stage('Checkout') {
-                sh "python Main.py Checkout Daily"
-            }
-            stage('Build User') {
-                sh "python Main.py Build User"
-            }
-            stage('Deploy User') {
-                sh "python Main.py Deploy User"
-            }
-            stage('Build UserDebug') {
-                sh "python Main.py Build UserDebug"
-            }
+
             stage('Deploy UserDebug') {
                 sh "python Main.py Deploy UserDebug"
             }
