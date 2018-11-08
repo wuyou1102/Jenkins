@@ -48,6 +48,17 @@ def copy_debug_info_to_deploy(src_folder, dst_folder):
         shutil.copyfile(src=src, dst=dst)
 
 
+def copy_ota_to_deploy(src_folder, ota_folder, binary_folder):
+    Utility.create_folder(ota_folder)
+    zipfile_ota = os.path.join(src_folder, 'g2-ota-%s.zip' % Env.get('BUILD_NUMBER'))
+    folder_intermediates = os.path.join(src_folder, 'obj', 'PACKAGING', 'target_files_intermediates')
+    zipfile_targetfile = os.path.join(folder_intermediates, 'g2-target_files-%s.zip' % Env.get('BUILD_NUMBER'))
+    image_system = os.path.join(src_folder, 'g2-target_files-%s' % Env.get('BUILD_NUMBER'), 'IMAGES', 'system.img')
+    shutil.copyfile(src=zipfile_ota, dst=os.path.join(ota_folder, 'ota.zip'))
+    shutil.copyfile(src=zipfile_targetfile, dst=os.path.join(ota_folder, 'target_files.zip'))
+    shutil.copyfile(src=image_system, dst=os.path.join(binary_folder, 'system.img'))
+
+
 def run(*args, **kwargs):
     Utility.print_info(__file__, *args, **kwargs)
     if not os.path.exists(Path.COMPILER_PATH):
@@ -55,9 +66,9 @@ def run(*args, **kwargs):
         sys.exit(0)
     version_type = args[2]
     if version_type == "UserDebug":
-        deploy_userdebug_version()
+        deploy_version(_type=userdebug)
     elif version_type == "User":
-        deploy_user_version()
+        deploy_version(_type=user)
     else:
         JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
     JobFunc.SendJobFinishMail()
@@ -67,27 +78,20 @@ userdebug = 'userdebug'
 user = 'user'
 binary = 'Binary'
 debuginfo = 'DebugInfo'
+ota = "OTA"
 
 
-def deploy_userdebug_version():
+def deploy_version(_type):
     output_path = get_userdebug_path()
     if output_path:
         deploy_path = Path.DAILY_DEPLOY
-        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, userdebug))
-        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, userdebug))
-        Utility.zip_folder(os.path.join(deploy_path, binary, userdebug))
-        Utility.zip_folder(os.path.join(deploy_path, debuginfo, userdebug))
-    else:
-        JobFunc.RaiseException(IOError, "Can not find out file.")
-
-
-def deploy_user_version():
-    output_path = get_user_path()
-    if output_path:
-        deploy_path = Path.DAILY_DEPLOY
-        copy_binary_to_deploy(src_folder=output_path, dst_folder=os.path.join(deploy_path, binary, user))
-        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=os.path.join(deploy_path, debuginfo, user))
-        Utility.zip_folder(os.path.join(deploy_path, binary, user))
-        Utility.zip_folder(os.path.join(deploy_path, debuginfo, user))
+        binary_folder = os.path.join(deploy_path, binary, _type)
+        debug_info_folder = os.path.join(deploy_path, debuginfo, _type)
+        ota_folder = os.path.join(deploy_path, ota, _type)
+        copy_binary_to_deploy(src_folder=output_path, dst_folder=binary_folder)
+        copy_debug_info_to_deploy(src_folder=get_out_path(), dst_folder=debug_info_folder)
+        copy_ota_to_deploy(src_folder=get_out_path(), ota_folder=ota_folder, binary_folder=binary_folder)
+        Utility.zip_folder(os.path.join(deploy_path, binary, _type))
+        Utility.zip_folder(os.path.join(deploy_path, debuginfo, _type))
     else:
         JobFunc.RaiseException(IOError, "Can not find out file.")
