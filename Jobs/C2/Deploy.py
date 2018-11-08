@@ -5,8 +5,9 @@ from libs import Utility
 import shutil
 import JobFunc
 from Config import Path
+
 BUILD_NUMBER = Env.get('BUILD_NUMBER')
-BUILD_NUMBER = 169
+
 
 def get_userdebug_path():
     out_path = get_out_path()
