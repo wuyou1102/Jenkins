@@ -84,7 +84,7 @@ ota = "OTA"
 
 
 def deploy_version(_type):
-    output_path = get_userdebug_path()
+    output_path = get_userdebug_path() if _type == userdebug else get_user_path()
     if output_path:
         deploy_path = Path.DAILY_DEPLOY
         binary_folder = os.path.join(deploy_path, binary, _type)
