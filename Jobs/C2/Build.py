@@ -29,6 +29,7 @@ def build_userdebug():
     ulimit_command = "ulimit -c unlimited"
     update_command = "make update-api -j8"
     make_command = "make -j8"
+    make_ota_command = "make otapackage -j8"
 
     commands = [
         envsetup_command,
@@ -36,7 +37,8 @@ def build_userdebug():
         lunch_command,
         ulimit_command,
         update_command,
-        make_command
+        make_command,
+        make_ota_command
     ]
     command = " && ".join(commands)
     command_exit_code = Utility.execute_command(cmd=command)
@@ -52,7 +54,8 @@ def build_user():
     lunch_command = "lunch g2-user general"
     ulimit_command = "ulimit -c unlimited"
     update_command = "make update-api -j8"
-    make_command = "make -j8"
+    make_command = "make -j8",
+    make_ota_command = "make otapackage -j8"
 
     commands = [
         envsetup_command,
@@ -60,7 +63,8 @@ def build_user():
         lunch_command,
         ulimit_command,
         update_command,
-        make_command
+        make_command,
+        make_ota_command
     ]
     command = " && ".join(commands)
     command_exit_code = Utility.execute_command(cmd=command)

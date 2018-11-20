@@ -60,9 +60,9 @@ def copy_ota_to_deploy(src_folder, ota_folder, binary_folder):
     image_boot = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'boot.img')
     shutil.copyfile(src=zipfile_ota, dst=os.path.join(ota_folder, 'ota.zip'))
     shutil.copyfile(src=zipfile_targetfile, dst=os.path.join(ota_folder, 'target_files.zip'))
-    shutil.copyfile(src=image_system, dst=os.path.join(binary_folder, 'system.img'))
-    shutil.copyfile(src=image_vendor, dst=os.path.join(binary_folder, 'vendor.img'))
-    shutil.copyfile(src=image_boot, dst=os.path.join(binary_folder, 'boot.img'))
+    # shutil.copyfile(src=image_system, dst=os.path.join(binary_folder, 'system.img'))
+    # shutil.copyfile(src=image_vendor, dst=os.path.join(binary_folder, 'vendor.img'))
+    # shutil.copyfile(src=image_boot, dst=os.path.join(binary_folder, 'boot.img'))
 
 
 def run(*args, **kwargs):
