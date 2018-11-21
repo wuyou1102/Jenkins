@@ -38,7 +38,7 @@ def build_userdebug():
         ulimit_command,
         update_command,
         make_command,
-        make_ota_command
+        # make_ota_command
     ]
     command = " && ".join(commands)
     command_exit_code = Utility.execute_command(cmd=command)
@@ -64,7 +64,7 @@ def build_user():
         ulimit_command,
         update_command,
         make_command,
-        make_ota_command
+        # make_ota_command
     ]
     command = " && ".join(commands)
     command_exit_code = Utility.execute_command(cmd=command)
