@@ -54,7 +54,7 @@ def build_user():
     lunch_command = "lunch g2-user general"
     ulimit_command = "ulimit -c unlimited"
     update_command = "make update-api -j8"
-    make_command = "make -j8",
+    make_command = "make -j8"
     make_ota_command = "make otapackage -j8"
 
     commands = [
@@ -77,3 +77,4 @@ def remove_out_folder():
     out_folder = os.path.join(workspace_path, "out")
     if os.path.exists(out_folder):
         shutil.rmtree(out_folder)
+
