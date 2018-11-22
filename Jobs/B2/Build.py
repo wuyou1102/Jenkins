@@ -39,6 +39,10 @@ def git_clone():
     command_exit_code = Utility.execute_command(cmd="git clone ssh://youwu@gerrit.sensethink.cn:29418/9201")
     if command_exit_code != 0:
         raise IOError
+    os.chdir(os.path.join(JobFunc.PATH_SOURCE_CODE, '9201'))
+    command_exit_code = Utility.execute_command(cmd="git checkout -b encrypt origin/encrypt")
+    if command_exit_code != 0:
+        raise IOError
 
 
 def make(script):
