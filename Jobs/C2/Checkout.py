@@ -50,7 +50,7 @@ def cleanup_repo(path):
 
 def check_commit_history(path):
     os.chdir(path)
-    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 1)
+    since = Utility.get_timestamp(time_fmt="%Y-%m-%d %H:%M", t=Env.BUILD_TIME - 3600 * 24 * 3)
     output = os.popen(Utility.Repo.log(since=since)).read()
     ConsolePrint.info(output)
     if output:

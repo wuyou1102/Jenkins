@@ -51,13 +51,14 @@ def copy_debug_info_to_deploy(src_folder, dst_folder):
 
 
 def copy_ota_to_deploy(src_folder, ota_folder, binary_folder):
+    print binary_folder
     Utility.create_folder(ota_folder)
     zipfile_ota = os.path.join(src_folder, 'g2-ota-%s.zip' % BUILD_NUMBER)
     folder_intermediates = os.path.join(src_folder, 'obj', 'PACKAGING', 'target_files_intermediates')
     zipfile_targetfile = os.path.join(folder_intermediates, 'g2-target_files-%s.zip' % BUILD_NUMBER)
-    image_system = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'system.img')
-    image_vendor = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'vendor.img')
-    image_boot = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'boot.img')
+    # image_system = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'system.img')
+    # image_vendor = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'vendor.img')
+    # image_boot = os.path.join(folder_intermediates, 'g2-target_files-%s' % BUILD_NUMBER, 'IMAGES', 'boot.img')
     shutil.copyfile(src=zipfile_ota, dst=os.path.join(ota_folder, 'ota.zip'))
     shutil.copyfile(src=zipfile_targetfile, dst=os.path.join(ota_folder, 'target_files.zip'))
     # shutil.copyfile(src=image_system, dst=os.path.join(binary_folder, 'system.img'))
