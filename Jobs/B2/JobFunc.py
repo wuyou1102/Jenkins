@@ -31,6 +31,6 @@ def remove_folder():
 
 
 def get_version_number():
-    with open(os.path.join(DAILY_DEPLOY, 'VersionNumber'), 'r') as f:
+    with open(os.path.join(DAILY_DEPLOY, 'VersionNumber.txt'), 'r') as f:
         ver = f.read()
     return ver
