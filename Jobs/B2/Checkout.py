@@ -38,7 +38,7 @@ def parse_version_config(config_path=None):
     with open(config_path) as old:
         config = dict()
         for line in old.readlines():
-            tmp = line.strip('\r\n').split(sep)
+            tmp = line.strip('\r\n').split(JobFunc.sep)
             config[tmp[0]] = tmp[1]
     config['Edition'] = '{0:02d}'.format(int(config['Edition']))
     config['Release'] = '{0:02d}'.format(int(config['Release']))
