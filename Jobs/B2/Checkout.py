@@ -49,7 +49,7 @@ def parse_version_config(config_path=None):
     version = '{name}-{number}'.format(name=version_name, number=version_number)
     with open(config_path, 'w') as new:
         for attr_name in ['Project', 'HW', 'Market', 'Reserved', 'Edition', 'Release', 'Internal']:
-            new.write('{name}{sep}{value}\n'.format(name=attr_name, sep=sep, value=config[attr_name]))
+            new.write('{name}{sep}{value}\n'.format(name=attr_name, sep=JobFunc.sep, value=config[attr_name]))
     print version
     return version
 
