@@ -2,7 +2,6 @@
 from libs import Utility
 import os
 import JobFunc
-import shutil
 
 
 def run(*args, **kwargs):
@@ -17,29 +16,19 @@ def run(*args, **kwargs):
 
 
 def build_p0():
-    remove_folder()
-    git_clone()
-    make('mkimg_demo.sh')
+    if os.path.exists(JobFunc.DAILY_DEPLOY):
+        JobFunc.remove_folder()
+        JobFunc.git_clone()
+        change_version_number()
+        make('mkimg_demo.sh')
 
 
 def build_p1():
-    remove_folder()
-    git_clone()
-    make('mkimg_g4.sh')
-
-
-
-
-
-def git_clone():
-    os.chdir(JobFunc.PATH_SOURCE_CODE)
-    command_exit_code = Utility.execute_command(cmd="git clone ssh://youwu@gerrit.sensethink.cn:29418/9201")
-    if command_exit_code != 0:
-        raise IOError
-    os.chdir(os.path.join(JobFunc.PATH_SOURCE_CODE, '9201'))
-    command_exit_code = Utility.execute_command(cmd="git checkout -b encrypt origin/encrypt")
-    if command_exit_code != 0:
-        raise IOError
+    if os.path.exists(JobFunc.DAILY_DEPLOY):
+        JobFunc.remove_folder()
+        JobFunc.git_clone()
+        change_version_number()
+        make('mkimg_g4.sh')
 
 
 def make(script):
@@ -63,3 +52,17 @@ def execute_script(script):
     command_exit_code = Utility.execute_command(cmd="./%s" % script)
     if command_exit_code != 0:
         raise IOError
+
+
+def get_version_number():
+    with open(JobFunc.DAILY_DEPLOY, 'VersionNumber') as f:
+        ver = f.read()
+    return ver
+
+
+def change_version_number():
+    version_number = get_version_number()
+    src_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, '9201')
+    version = os.path.join(src_folder, 'versions', 'version.txt')
+    with open(version, 'w') as f:
+        f.write(version_number)
