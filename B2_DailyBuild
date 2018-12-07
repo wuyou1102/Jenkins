@@ -3,7 +3,7 @@ node {
         dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout')
             {
-                sh "python Main.py Checkout
+                sh "python Main.py Checkout"
             }
             stage('Build P0') {
                 sh "python Main.py Build P0"
