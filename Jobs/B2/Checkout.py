@@ -5,4 +5,5 @@ import JobFunc
 
 
 def run(*args, **kwargs):
-    pass
+    src_path = JobFunc.git_clone()
+    JobFunc.check_commit_history(path=src_path)
