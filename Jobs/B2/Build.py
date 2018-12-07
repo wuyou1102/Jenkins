@@ -28,10 +28,7 @@ def build_p1():
     make('mkimg_g4.sh')
 
 
-def remove_folder():
-    src_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, "9201")
-    if os.path.exists(src_folder):
-        shutil.rmtree(src_folder)
+
 
 
 def git_clone():

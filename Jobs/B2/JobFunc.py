@@ -3,6 +3,7 @@ import os
 from libs.Utility import ConsolePrint
 from libs import Utility
 from libs import Environment as Env
+import shutil
 
 PATH_SOURCE_CODE = "/home/bspserver/sda/B2_SourceCode"
 PATH_DAILY_BUILD = "/home/bspserver/sda/B2_DailyBuild"
@@ -71,3 +72,9 @@ def generate_version_number(path):
     with open(os.path.join(path, "VersionNumber.txt"), "w") as wfile:
         wfile.write(version_number)
     return version_number
+
+
+def remove_folder():
+    src_folder = os.path.join(PATH_SOURCE_CODE, "9201")
+    if os.path.exists(src_folder):
+        shutil.rmtree(src_folder)
