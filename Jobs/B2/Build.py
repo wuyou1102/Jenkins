@@ -71,13 +71,15 @@ def copy_image(_type):
     u_disk2 = 'B2%sU.' % _type
     full = 'B2%sF.' % _type
     dst_folder = Utility.create_folder(os.path.join(JobFunc.DAILY_DEPLOY, _type))
-    version = JobFunc.get_version_number()
+    version = JobFunc.get_version_number().split('.')[-1]
     for f in os.listdir(output_folder):
         if f.startswith(full):
             shutil.copy(src=os.path.join(output_folder, f),
-                        dst=os.path.join(dst_folder, "B2%sF.%s.img" % (_type, version)))
+                        dst=os.path.join(dst_folder, "B2%sF_%s.img" % (_type, version)))
+            Utility.zip_folder(path=dst_folder)
         elif f.startswith(u_disk1) or f.startswith(u_disk2):
             shutil.copy(src=os.path.join(output_folder, f),
-                        dst=os.path.join(dst_folder, "B2%sU.%s.img" % (_type, version)))
+                        dst=os.path.join(dst_folder, "B2%sU_%s.img" % (_type, version)))
+            Utility.zip_folder(path=dst_folder)
         else:
             print "wuyou debug:->%s" % f
