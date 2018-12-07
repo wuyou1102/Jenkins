@@ -28,3 +28,9 @@ def remove_folder():
     src_folder = os.path.join(PATH_SOURCE_CODE, "9201")
     if os.path.exists(src_folder):
         shutil.rmtree(src_folder)
+
+
+def get_version_number():
+    with open(os.path.join(DAILY_DEPLOY, 'VersionNumber'), 'r') as f:
+        ver = f.read()
+    return ver
