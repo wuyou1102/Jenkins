@@ -5,11 +5,14 @@ from libs import Utility
 from libs import Environment as Env
 import shutil
 
-PATH_SOURCE_CODE = "/home/bspserver/sda/B2/B2_SourceCode"
-PATH_9A_CONFIG = "/home/bspserver/sda/VersionConfig/B2_9A.txt"
-PATH_9A_DAILY = "/home/bspserver/sda/B2/B2_9A_DailyBuild"
-PATH_9B_CONFIG = "/home/bspserver/sda/VersionConfig/B2_9B.txt"
-PATH_9B_DAILY = "/home/bspserver/sda/B2/B2_9B_DailyBuild"
+PATH_SOURCE_CODE = "/home/bspserver/sda/B2/SourceCode"
+PATH_CONFIG_9A = "/home/bspserver/sda/VersionConfig/B2/9A.txt"
+PATH_CONFIG_9B = "/home/bspserver/sda/VersionConfig/B2/9B.txt"
+PATH_DAILY_9A = "/home/bspserver/sda/B2/DailyBuild/9A"
+PATH_DAILY_9B = "/home/bspserver/sda/B2/DailyBuild/9B"
+PATH_WEEKLY_9A = "/home/bspserver/sda/B2/WeeklyBuild/9A"
+PATH_WEEKLY_9B = "/home/bspserver/sda/B2/WeeklyBuild/9B"
+
 
 sep = " *|* "
 
@@ -40,11 +43,11 @@ def get_version_number(path):
 
 def get_deploy_path(_type):
     if _type == "P0":
-        return os.path.join(PATH_9A_DAILY, Env.BUILD_TIMESTAMP)
-    return os.path.join(PATH_9B_DAILY, Env.BUILD_TIMESTAMP)
+        return os.path.join(PATH_DAILY_9A, Env.BUILD_TIMESTAMP)
+    return os.path.join(PATH_DAILY_9B, Env.BUILD_TIMESTAMP)
 
 
 def get_config_path(_type):
     if _type == "P0":
-        return PATH_9A_CONFIG
-    return PATH_9B_CONFIG
+        return PATH_CONFIG_9A
+    return PATH_CONFIG_9B
