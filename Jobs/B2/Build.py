@@ -68,7 +68,8 @@ def copy_image(_type):
     u_disk1 = 'artosyn-upgrade-B2%sU.' % _type
     u_disk2 = 'B2%sU.' % _type
     full = 'B2%sF.' % _type
-    dst_folder = Utility.create_folder(os.path.join(JobFunc.get_deploy_path(_type), _type))
+    # dst_folder = Utility.create_folder(os.path.join(JobFunc.get_deploy_path(_type), _type))
+    dst_folder = JobFunc.get_deploy_path(_type)
     version = JobFunc.get_version_number(JobFunc.get_deploy_path(_type=_type)).split('.')[-1]
     for f in os.listdir(output_folder):
         if f.startswith(full):
