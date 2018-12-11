@@ -41,6 +41,7 @@ def get_version_number(path):
 def get_deploy_path(_type):
     if _type == "P0":
         return os.path.join(PATH_9A_DAILY, Env.BUILD_TIMESTAMP)
+    return os.path.join(PATH_9B_DAILY, Env.BUILD_TIMESTAMP)
 
 
 def get_config_path(_type):

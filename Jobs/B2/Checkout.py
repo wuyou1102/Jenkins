@@ -34,8 +34,7 @@ def write_commit_history(path, commit_msg):
     return True
 
 
-def parse_version_config(config_path=None):
-    config_path = config_path if config_path else JobFunc.PATH_CONFIG_PATH
+def parse_version_config(config_path):
     with open(config_path) as old:
         config = dict()
         for line in old.readlines():
