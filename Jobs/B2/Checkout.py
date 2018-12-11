@@ -17,15 +17,15 @@ def check_commit_history(path, _type):
     output = os.popen('git log --since=1.day').read()
     ConsolePrint.info("wuyou debug:-> %s" % output)
     if output:
-        create_deploy_folder(path=JobFunc.get_deploy_path(_type), commit_msg=output)
+        create_deploy_folder(path=JobFunc.get_deploy_path(_type), commit_msg=output, _type=_type)
     else:
         ConsolePrint.info("No commit submitted in the last day ")
 
 
-def create_deploy_folder(path, commit_msg):
+def create_deploy_folder(path, commit_msg, _type):
     Utility.create_folder(path=path)
     write_commit_history(path=path, commit_msg=commit_msg)
-    return generate_version_number(path=path)
+    return generate_version_number(path=path, _type=_type)
 
 
 def write_commit_history(path, commit_msg):
@@ -55,8 +55,8 @@ def parse_version_config(config_path=None):
     return version
 
 
-def generate_version_number(path):
-    version_number = parse_version_config()
+def generate_version_number(path, _type):
+    version_number = parse_version_config(path=JobFunc.get_config_path(_type=_type))
     with open(os.path.join(path, "VersionNumber.txt"), "w") as wfile:
         wfile.write(version_number)
     return version_number
