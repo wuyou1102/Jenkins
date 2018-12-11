@@ -56,7 +56,7 @@ def parse_version_config(config_path=None):
 
 
 def generate_version_number(path, _type):
-    version_number = parse_version_config(path=JobFunc.get_config_path(_type=_type))
+    version_number = parse_version_config(config_path=JobFunc.get_config_path(_type=_type))
     with open(os.path.join(path, "VersionNumber.txt"), "w") as wfile:
         wfile.write(version_number)
     return version_number
