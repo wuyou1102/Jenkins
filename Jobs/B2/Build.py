@@ -20,19 +20,17 @@ def run(*args, **kwargs):
 
 
 def build_p0():
-    if os.path.exists(JobFunc.DAILY_DEPLOY):
-        JobFunc.remove_folder()
-        JobFunc.git_clone()
-        change_version_number()
+    version_type = "P0"
+    if os.path.exists(JobFunc.get_deploy_path(_type=version_type)):
+        change_version_number(version_type)
         make('mkimg_demo.sh')
         copy_image(_type="P0")
 
 
 def build_p1():
-    if os.path.exists(JobFunc.DAILY_DEPLOY):
-        JobFunc.remove_folder()
-        JobFunc.git_clone()
-        change_version_number()
+    version_type = "P1"
+    if os.path.exists(JobFunc.get_deploy_path(_type=version_type)):
+        change_version_number(version_type)
         make('mkimg_g4.sh')
         copy_image(_type="P1")
 
@@ -59,8 +57,8 @@ def execute_script(script):
         raise IOError
 
 
-def change_version_number():
-    version_number = JobFunc.get_version_number()
+def change_version_number(_type):
+    version_number = JobFunc.get_version_number(JobFunc.get_deploy_path(_type=_type))
     version = os.path.join(src_folder, 'versions', 'version.txt')
     with open(version, 'w') as f:
         f.write(version_number)
@@ -70,7 +68,7 @@ def copy_image(_type):
     u_disk1 = 'artosyn-upgrade-B2%sU.' % _type
     u_disk2 = 'B2%sU.' % _type
     full = 'B2%sF.' % _type
-    dst_folder = Utility.create_folder(os.path.join(JobFunc.DAILY_DEPLOY, _type))
+    dst_folder = Utility.create_folder(os.path.join(JobFunc.get_deploy_path(_type), _type))
     version = JobFunc.get_version_number().split('.')[-1]
     for f in os.listdir(output_folder):
         if f.startswith(full):

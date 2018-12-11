@@ -32,8 +32,8 @@ def remove_folder():
         shutil.rmtree(src_folder)
 
 
-def get_version_number(_type):
-    with open(os.path.join(_type, 'VersionNumber.txt'), 'r') as f:
+def get_version_number(path):
+    with open(os.path.join(path, 'VersionNumber.txt'), 'r') as f:
         ver = f.read()
     return ver
 
