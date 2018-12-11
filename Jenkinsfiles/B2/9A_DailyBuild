@@ -1,15 +1,12 @@
 node {
     try {
-        dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
+        dir("${env.WORKSPACE}/../../../${env.JOB_NAME}@script/"){
             stage('Checkout')
             {
                 sh "python Main.py Checkout"
             }
             stage('Build P0') {
                 sh "python Main.py Build P0"
-            }
-            stage('Build P1') {
-                sh "python Main.py Build P1"
             }
         }
     } catch (err) {

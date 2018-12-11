@@ -1,13 +1,13 @@
 # -*- encoding:UTF-8 -*-
 
-def Get_Python_Job(JobName=None):
+def Get_Python_Job(JobName=''):
     if JobName == "C2_DailyBuild":
         import C2
         return C2
     elif JobName == "BSP_TiggerBuild":
         import BSP_TiggerBuild
         return BSP_TiggerBuild
-    elif JobName == "B2_DailyBuild":
+    elif JobName.startswith('B29A') or JobName.startswith('B29B'):
         import B2
         return B2
     elif JobName == "C2_CleanupSourceCode":

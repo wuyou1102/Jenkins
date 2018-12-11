@@ -6,17 +6,18 @@ import JobFunc
 
 
 def run(*args, **kwargs):
+    version_type = args[2]
     JobFunc.remove_folder()
     src_path = JobFunc.git_clone()
-    check_commit_history(path=src_path)
+    check_commit_history(path=src_path, _type=version_type)
 
 
-def check_commit_history(path):
+def check_commit_history(path, _type):
     os.chdir(path)
     output = os.popen('git log --since=1.day').read()
     ConsolePrint.info("wuyou debug:-> %s" % output)
     if output:
-        create_deploy_folder(path=JobFunc.DAILY_DEPLOY, commit_msg=output)
+        create_deploy_folder(path=JobFunc.get_deploy_path(_type), commit_msg=output)
     else:
         ConsolePrint.info("No commit submitted in the last day ")
 

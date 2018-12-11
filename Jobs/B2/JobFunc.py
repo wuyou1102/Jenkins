@@ -5,10 +5,12 @@ from libs import Utility
 from libs import Environment as Env
 import shutil
 
-PATH_SOURCE_CODE = "/home/bspserver/sda/B2_SourceCode"
-PATH_DAILY_BUILD = "/home/bspserver/sda/B2_DailyBuild"
-PATH_CONFIG_PATH = "/home/bspserver/sda/VersionConfig/B2.txt"
-DAILY_DEPLOY = os.path.join(PATH_DAILY_BUILD, Env.BUILD_TIMESTAMP)
+PATH_SOURCE_CODE = "/home/bspserver/sda/B2/B2_SourceCode"
+PATH_9A_CONFIG = "/home/bspserver/sda/VersionConfig/B2_9A.txt"
+PATH_9A_DAILY = "/home/bspserver/sda/B2/B2_9A_DailyBuild"
+PATH_9B_CONFIG = "/home/bspserver/sda/VersionConfig/B2_9B.txt"
+PATH_9B_DAILY = "/home/bspserver/sda/B2/B2_9B_DailyBuild"
+
 sep = " *|* "
 
 
@@ -30,7 +32,13 @@ def remove_folder():
         shutil.rmtree(src_folder)
 
 
-def get_version_number():
-    with open(os.path.join(DAILY_DEPLOY, 'VersionNumber.txt'), 'r') as f:
+def get_version_number(_type):
+    with open(os.path.join(_type, 'VersionNumber.txt'), 'r') as f:
         ver = f.read()
     return ver
+
+
+def get_deploy_path(_type):
+    if _type == "P0":
+        return os.path.join(PATH_9A_DAILY, Env.BUILD_TIMESTAMP)
+    return os.path.join(PATH_9B_DAILY, Env.BUILD_TIMESTAMP)
