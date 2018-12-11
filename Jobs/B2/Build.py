@@ -74,10 +74,8 @@ def copy_image(_type):
         if f.startswith(full):
             shutil.copy(src=os.path.join(output_folder, f),
                         dst=os.path.join(dst_folder, "B2%sF_%s.img" % (_type, version)))
-            Utility.zip_folder(path=dst_folder)
         elif f.startswith(u_disk1) or f.startswith(u_disk2):
             shutil.copy(src=os.path.join(output_folder, f),
                         dst=os.path.join(dst_folder, "B2%sU_%s.img" % (_type, version)))
-            Utility.zip_folder(path=dst_folder)
         else:
             print "wuyou debug:->%s" % f

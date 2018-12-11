@@ -5,7 +5,7 @@ node {
             {
                 sh "python Main.py Checkout P0"
             }
-            stage('Build P0') {
+            stage('Build') {
                 sh "python Main.py Build P0"
             }
         }
