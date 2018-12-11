@@ -1,6 +1,6 @@
 node {
     try {
-        dir("${env.WORKSPACE}/../../../${env.JOB_NAME}@script/"){
+        dir("${env.WORKSPACE}/../${env.JOB_NAME}@script/"){
             stage('Checkout')
             {
                 sh "python Main.py Checkout"
