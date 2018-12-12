@@ -8,10 +8,12 @@ import shutil
 def run(*args, **kwargs):
     version_type = Env.get('VersionType')
     need_release = Env.get('NeedRelease')
+    if not version_type:
+        raise IOError(u"版本类型配置不正确")
     daily_path, weekly_path = __get_path(version_type)
     src_folder = get_src_folder(daily_path, need_release)
     src = os.path.join(daily_path, src_folder)
-    dst = os.path.join(daily_path, src_folder)
+    dst = os.path.join(weekly_path, src_folder)
     shutil.copytree(src=src, dst=dst)
 
 
