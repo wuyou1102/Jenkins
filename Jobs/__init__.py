@@ -7,7 +7,7 @@ def Get_Python_Job(JobName=''):
     elif JobName == "BSP_TiggerBuild":
         import BSP_TiggerBuild
         return BSP_TiggerBuild
-    elif JobName.startswith('B2_9A') or JobName.startswith('B2_9B'):
+    elif JobName.startswith('B2'):
         import B2
         return B2
     elif JobName == "C2_CleanupSourceCode":

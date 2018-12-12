@@ -2,3 +2,4 @@
 from Build import run as build
 from Checkout import run as checkout
 from Test import run as test
+from Release import run as release
