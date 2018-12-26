@@ -67,18 +67,20 @@ def copy_ota_to_deploy(src_folder, ota_folder, binary_folder):
 
 
 def run(*args, **kwargs):
-    Utility.print_info(__file__, *args, **kwargs)
-    if not os.path.exists(Path.COMPILER_PATH):
-        import sys
-        sys.exit(0)
-    version_type = args[2]
-    if version_type == "UserDebug":
-        deploy_version(_type=userdebug)
-    elif version_type == "User":
-        deploy_version(_type=user)
-    else:
-        JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
-    JobFunc.SendJobFinishMail()
+    try:
+        Utility.print_info(__file__, *args, **kwargs)
+        if not os.path.exists(Path.COMPILER_PATH):
+            import sys
+            sys.exit(0)
+        version_type = args[2]
+        if version_type == "UserDebug":
+            deploy_version(_type=userdebug)
+        elif version_type == "User":
+            deploy_version(_type=user)
+        Utility.job_finished(text=u"[%s]编译完成" % version_type)
+    except Exception:
+        Utility.job_exception()
+        raise Exception
 
 
 userdebug = 'userdebug'
@@ -101,4 +103,4 @@ def deploy_version(_type):
         Utility.zip_folder(os.path.join(deploy_path, binary, _type))
         Utility.zip_folder(os.path.join(deploy_path, debuginfo, _type))
     else:
-        JobFunc.RaiseException(IOError, "Can not find out file.")
+        raise IOError('No such file or directory: %s' % output_path)
