@@ -135,9 +135,9 @@ def zip_folder(path):
     execute_command("zip -r %s.zip %s" % (f, f))
 
 
-def RaiseException(Exception, build_info, users):
+def RaiseException(error, build_info, users):
     Incoming.job_error(build=build_info, users=users)
-    raise Exception
+    raise error
 
 
 if __name__ == '__main__':

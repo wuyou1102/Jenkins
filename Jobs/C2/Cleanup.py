@@ -17,7 +17,7 @@ def run(*args, **kwargs):
         remove_oldest_version()
         Utility.Incoming.job_finished(["chengwei"], build_info=Environment.environ, text="")
     except Exception, e:
-        Utility.RaiseException()
+        Utility.RaiseException(error=Exception, build_info=Environment.environ, users=["weicheng"])
 
 
 def remove_empty_commit_history():
