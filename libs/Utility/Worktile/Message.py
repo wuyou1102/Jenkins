@@ -42,7 +42,7 @@ def trigger_user_filed(user):
 def start_time_filed():
     return {
         "title": u"开始时间：",
-        "value": TimeFormat.get_timestamp(),
+        "value": TimeFormat.get_timestamp(time_fmt='%Y年%m月%d日 %H:%M:%S'),
         "short": 1
     }
 
@@ -50,7 +50,7 @@ def start_time_filed():
 def finished_time_filed():
     return {
         "title": u"完成时间：",
-        "value": TimeFormat.get_timestamp(),
+        "value": TimeFormat.get_timestamp(time_fmt='%Y年%m月%d日 %H:%M:%S'),
         "short": 1
     }
 
@@ -87,7 +87,6 @@ def job_started(users, build_info, text):
 
 
 def job_finished(users, build_info, text):
-    2 / 0
     title = "%s[%s] - Finished" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
         trigger_user_filed(build_info[USER]), finished_time_filed(),
