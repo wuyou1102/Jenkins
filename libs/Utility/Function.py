@@ -143,10 +143,9 @@ def get_traceback():
     return ""
 
 
-def RaiseException(error, build_info, users):
+def RaiseException(error, build_info, users=[]):
     resp = Incoming.job_error(build_info=build_info, users=users, text=get_traceback())
-    print resp.content
-    print resp
+    raise error
 
 
 if __name__ == '__main__':

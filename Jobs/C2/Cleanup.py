@@ -11,13 +11,12 @@ DAILY_PATH = Path.__DAILY_PATH
 
 def run(*args, **kwargs):
     try:
-        print Environment.environ
         Utility.Incoming.job_started(["chengwei"], build_info=Environment.environ, text="")
         remove_empty_commit_history()
         remove_oldest_version()
         Utility.Incoming.job_finished(["chengwei"], build_info=Environment.environ, text="")
     except Exception, e:
-        Utility.RaiseException(error=Exception, build_info=Environment.environ, users=["weicheng"])
+        Utility.RaiseException(error=Exception, build_info=Environment.environ)
 
 
 def remove_empty_commit_history():
