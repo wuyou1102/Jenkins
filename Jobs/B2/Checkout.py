@@ -8,13 +8,13 @@ from libs import Environment
 
 def run(*args, **kwargs):
     try:
-        Utility.job_started(build_info=Environment.environ)
+        Utility.job_started()
         version_type = args[2]
         JobFunc.remove_folder()
         src_path = JobFunc.git_clone()
         check_commit_history(path=src_path, _type=version_type)
     except Exception:
-        Utility.Incoming.job_exception(build_info=Environment.environ)
+        Utility.Incoming.job_exception()
         raise Exception
 
 

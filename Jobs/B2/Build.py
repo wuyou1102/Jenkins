@@ -17,9 +17,9 @@ def run(*args, **kwargs):
             build_p0()
         elif version_type == "P1":
             build_p1()
-        Utility.job_finished(build_info=Environment.environ)
+        Utility.job_finished()
     except Exception:
-        Utility.job_exception(build_info=Environment.environ)
+        Utility.job_exception()
         raise Exception
 
 

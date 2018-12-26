@@ -11,7 +11,7 @@ def run(*args, **kwargs):
     try:
         Utility.print_info(__file__, args, kwargs)
         if not os.path.exists(Path.COMPILER_PATH):
-            Utility.job_finished(build_info=Environment.environ, text=u"没有任何新的代码提交")
+            Utility.job_finished(text=u"没有任何新的代码提交")
             import sys
             sys.exit(0)
         version_type = args[2]
@@ -20,9 +20,8 @@ def run(*args, **kwargs):
             build_userdebug()
         elif version_type == "User":
             build_user()
-        Utility.job_finished(build_info=Environment.environ)
     except Exception:
-        Utility.job_exception(build_info=Environment.environ)
+        Utility.job_exception()
         raise Exception
 
 

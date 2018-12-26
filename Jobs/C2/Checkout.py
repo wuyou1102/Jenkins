@@ -5,16 +5,19 @@ from libs.Utility import ConsolePrint
 from libs import Environment as Env
 from Config import Path
 import JobFunc
-import sys
 
 
 def run(*args, **kwargs):
-    JobFunc.SendJobStartMail()
-    Utility.print_info(__file__, args, kwargs)
-    check_space_available(path=Path.COMPILER_PATH)  # 检查硬盘空间是否充足
-    init_repo(path=Path.COMPILER_PATH)  # 初始化 repo
-    sync_repo(path=Path.COMPILER_PATH)  # 同步 repo
-    check_commit_history(path=Path.COMPILER_PATH)  # 检查是否有最新的提交记录
+    try:
+        Utility.job_started()
+        Utility.print_info(__file__, args, kwargs)
+        check_space_available(path=Path.COMPILER_PATH)  # 检查硬盘空间是否充足
+        init_repo(path=Path.COMPILER_PATH)  # 初始化 repo
+        sync_repo(path=Path.COMPILER_PATH)  # 同步 repo
+        check_commit_history(path=Path.COMPILER_PATH)  # 检查是否有最新的提交记录
+    except Exception:
+        Utility.job_exception()
+        raise Exception
 
 
 def check_space_available(path):
