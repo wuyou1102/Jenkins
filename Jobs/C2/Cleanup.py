@@ -3,14 +3,21 @@ from libs import Utility
 from Config import Path
 import os
 import shutil
+from libs import Environment
 
 SOURCE_CODE_PATH = Path.__SOURCE_PATH
 DAILY_PATH = Path.__DAILY_PATH
 
 
 def run(*args, **kwargs):
-    remove_empty_commit_history()
-    remove_oldest_version()
+    try:
+        print Environment.environ
+        Utility.Incoming.job_started(["chengwei"], build_info=Environment.environ, text="")
+        remove_empty_commit_history()
+        remove_oldest_version()
+        Utility.Incoming.job_finished(["chengwei"], build_info=Environment.environ, text="")
+    except Exception, e:
+        Utility.RaiseException()
 
 
 def remove_empty_commit_history():

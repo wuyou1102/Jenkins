@@ -4,6 +4,7 @@ import subprocess
 from libs import Environment as Env
 import ConsolePrint
 import psutil
+from Worktile import Incoming
 
 
 def get_compiler_path():
@@ -132,6 +133,11 @@ def zip_folder(path):
     p, f = os.path.split(path)
     os.chdir(p)
     execute_command("zip -r %s.zip %s" % (f, f))
+
+
+def RaiseException(Exception, build_info, users):
+    Incoming.job_error(build=build_info, users=users)
+    raise Exception
 
 
 if __name__ == '__main__':
