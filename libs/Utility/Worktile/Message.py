@@ -73,10 +73,11 @@ JOB_NAME = "JOB_NAME"
 BUILD_TIMESTAMP = "BUILD_TIMESTAMP"
 BUILD_URL = "BUILD_URL"
 USER = "USER"
+BUILD_NUMBER = 'BUILD_NUMBER'
 
 
 def job_started(users, build_info, text):
-    title = "Jenkins:%s - Started" % build_info[JOB_NAME]
+    title = "%s<%s> - Started" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
         trigger_user_filed(build_info[USER]), trigger_time_filed(build_info[BUILD_TIMESTAMP]),
         at_users_filed(users=users),
@@ -86,7 +87,7 @@ def job_started(users, build_info, text):
 
 
 def job_finished(users, build_info, text):
-    title = "Jenkins:%s - Finished" % build_info[JOB_NAME]
+    title = "%s<%s> - Finished" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
         trigger_user_filed(build_info[USER]), finished_time_filed(),
         at_users_filed(users=users),
@@ -96,7 +97,7 @@ def job_finished(users, build_info, text):
 
 
 def job_error(users, build_info, text):
-    title = "Jenkins:%s - Error" % build_info[JOB_NAME]
+    title = "%s<%s> - Error" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
         at_users_filed(users=users),
         url_filed(url=build_info[BUILD_URL])
