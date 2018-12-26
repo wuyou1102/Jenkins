@@ -39,10 +39,10 @@ def trigger_user_filed(user):
     }
 
 
-def trigger_time_filed(time):
+def start_time_filed():
     return {
-        "title": u"触发时间：",
-        "value": TimeFormat.get_timestamp(t=float(time)),
+        "title": u"开始时间：",
+        "value": TimeFormat.get_timestamp(),
         "short": 1
     }
 
@@ -77,9 +77,9 @@ BUILD_NUMBER = 'BUILD_NUMBER'
 
 
 def job_started(users, build_info, text):
-    title = "%s<%s> - Started" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
+    title = "%s[%s] - Started" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
-        trigger_user_filed(build_info[USER]), trigger_time_filed(build_info[BUILD_TIMESTAMP]),
+        trigger_user_filed(build_info[USER]), start_time_filed(),
         at_users_filed(users=users),
         url_filed(url=build_info[BUILD_URL])
     ]
@@ -87,7 +87,8 @@ def job_started(users, build_info, text):
 
 
 def job_finished(users, build_info, text):
-    title = "%s<%s> - Finished" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
+    2 / 0
+    title = "%s[%s] - Finished" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
     fields = [
         trigger_user_filed(build_info[USER]), finished_time_filed(),
         at_users_filed(users=users),
@@ -97,7 +98,8 @@ def job_finished(users, build_info, text):
 
 
 def job_error(users, build_info, text):
-    title = "%s<%s> - Error" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
+    title = "%s[%s] - Error" % (build_info[JOB_NAME], build_info[BUILD_NUMBER])
+
     fields = [
         at_users_filed(users=users),
         url_filed(url=build_info[BUILD_URL])
