@@ -3,13 +3,19 @@ import os
 from libs import Utility
 from libs.Utility import ConsolePrint
 import JobFunc
+from libs import Environment
 
 
 def run(*args, **kwargs):
-    version_type = args[2]
-    JobFunc.remove_folder()
-    src_path = JobFunc.git_clone()
-    check_commit_history(path=src_path, _type=version_type)
+    try:
+        Utility.job_started(build_info=Environment.environ)
+        version_type = args[2]
+        JobFunc.remove_folder()
+        src_path = JobFunc.git_clone()
+        check_commit_history(path=src_path, _type=version_type)
+    except Exception:
+        Utility.Incoming.job_exception(build_info=Environment.environ)
+        raise Exception
 
 
 def check_commit_history(path, _type):

@@ -3,21 +3,26 @@ import os
 import JobFunc
 import shutil
 from Config import Path
+from libs import Environment
 
 
 def run(*args, **kwargs):
-    Utility.print_info(__file__, args, kwargs)
-    if not os.path.exists(Path.COMPILER_PATH):
-        import sys
-        sys.exit(0)
-    version_type = args[2]
-    remove_out_folder()
-    if version_type == "UserDebug":
-        build_userdebug()
-    elif version_type == "User":
-        build_user()
-    else:
-        JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
+    try:
+        Utility.print_info(__file__, args, kwargs)
+        if not os.path.exists(Path.COMPILER_PATH):
+            Utility.job_finished(build_info=Environment.environ, text=u"没有任何新的代码提交")
+            import sys
+            sys.exit(0)
+        version_type = args[2]
+        remove_out_folder()
+        if version_type == "UserDebug":
+            build_userdebug()
+        elif version_type == "User":
+            build_user()
+        Utility.job_finished(build_info=Environment.environ)
+    except Exception:
+        Utility.job_exception(build_info=Environment.environ)
+        raise Exception
 
 
 def build_userdebug():
@@ -77,4 +82,3 @@ def remove_out_folder():
     out_folder = os.path.join(workspace_path, "out")
     if os.path.exists(out_folder):
         shutil.rmtree(out_folder)
-

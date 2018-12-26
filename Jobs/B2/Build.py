@@ -3,20 +3,24 @@ from libs import Utility
 import os
 import JobFunc
 import shutil
+from libs import Environment
 
 src_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, '9201')
 output_folder = os.path.join(JobFunc.PATH_SOURCE_CODE, "9201", "output", "image")
 
 
 def run(*args, **kwargs):
-    Utility.print_info(__file__, args, kwargs)
-    version_type = args[2]
-    if version_type == "P0":
-        build_p0()
-    elif version_type == "P1":
-        build_p1()
-    else:
-        JobFunc.RaiseException(KeyError, "Unknown version type:%s" % version_type)
+    try:
+        Utility.print_info(__file__, args, kwargs)
+        version_type = args[2]
+        if version_type == "P0":
+            build_p0()
+        elif version_type == "P1":
+            build_p1()
+        Utility.job_finished(build_info=Environment.environ, text=JobFunc.get_version_number())
+    except Exception:
+        Utility.job_exception(build_info=Environment.environ)
+        raise Exception
 
 
 def build_p0():
@@ -35,6 +39,7 @@ def build_p1():
         make('mkimg_g4.sh')
         dst_folder = copy_image(_type="P1")
         Utility.zip_folder(dst_folder)
+
 
 def make(script):
     script_path = os.path.join(src_folder, script)
