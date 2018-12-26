@@ -5,6 +5,7 @@ from libs import Environment as Env
 import ConsolePrint
 import psutil
 from Worktile import Incoming
+import traceback
 
 
 def get_compiler_path():
@@ -135,8 +136,15 @@ def zip_folder(path):
     execute_command("zip -r %s.zip %s" % (f, f))
 
 
+def get_traceback():
+    tmp = traceback.format_exc()
+    if tmp != 'None\n':
+        return tmp
+    return ""
+
+
 def RaiseException(error, build_info, users):
-    Incoming.job_error(build=build_info, users=users)
+    Incoming.job_error(build_info=build_info, users=users, text=get_traceback())
     raise error
 
 
