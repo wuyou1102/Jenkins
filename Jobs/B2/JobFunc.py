@@ -1,6 +1,5 @@
 # -*- encoding:UTF-8 -*-
 import os
-from libs.Utility import ConsolePrint
 from libs import Utility
 from libs import Environment as Env
 import shutil

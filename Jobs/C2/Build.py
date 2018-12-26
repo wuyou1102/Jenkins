@@ -1,3 +1,4 @@
+# -*- encoding:UTF-8 -*-
 from libs import Utility
 import os
 import JobFunc
