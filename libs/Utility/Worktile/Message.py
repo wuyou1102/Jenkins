@@ -42,7 +42,7 @@ def trigger_user_filed(user):
 def trigger_time_filed(time):
     return {
         "title": u"触发时间：",
-        "value": TimeFormat.get_timestamp(t=time),
+        "value": TimeFormat.get_timestamp(t=float(time)),
         "short": 1
     }
 
