@@ -69,36 +69,36 @@ def base(title, text, color, fields):
     return msg
 
 
-job_name = "job_name"
+JOB_NAME = "JOB_NAME"
 BUILD_TIMESTAMP = "BUILD_TIMESTAMP"
-trigger = "trigger"
-number = "number"
+BUILD_URL = "BUILD_URL"
+USER = "USER"
 
 
 def job_started(users, build_info, text):
-    title = "Jenkins:%s - Started" % build_info[job_name]
+    title = "Jenkins:%s - Started" % build_info[JOB_NAME]
     fields = [
-        trigger_user_filed(build_info[trigger]), trigger_time_filed(build_info[BUILD_TIMESTAMP]),
+        trigger_user_filed(build_info[USER]), trigger_time_filed(build_info[BUILD_TIMESTAMP]),
         at_users_filed(users=users),
-        url_filed(url="http://jenkins.sensethink.cn/job/%s/%s/" % (build_info[job_name], build_info[number]))
+        url_filed(url=build_info[BUILD_URL])
     ]
     return base(title=title, text=text, color="#1E90FF", fields=fields)
 
 
 def job_finished(users, build_info, text):
-    title = "Jenkins:%s - Finished" % build_info[job_name]
+    title = "Jenkins:%s - Finished" % build_info[JOB_NAME]
     fields = [
-        trigger_user_filed(build_info[trigger]), finished_time_filed(),
+        trigger_user_filed(build_info[USER]), finished_time_filed(),
         at_users_filed(users=users),
-        url_filed(url="http://jenkins.sensethink.cn/job/%s/%s/" % (build_info[job_name], build_info[number]))
+        url_filed(url=build_info[BUILD_URL])
     ]
     return base(title=title, text=text, color="#00FF7F", fields=fields)
 
 
 def job_error(users, build_info, text):
-    title = "Jenkins:%s - Error" % build_info[job_name]
+    title = "Jenkins:%s - Error" % build_info[JOB_NAME]
     fields = [
         at_users_filed(users=users),
-        url_filed(url="http://jenkins.sensethink.cn/job/%s/%s/" % (build_info[job_name], build_info[number]))
+        url_filed(url=build_info[BUILD_URL])
     ]
     return base(title=title, text=text, color="#FF0000", fields=fields)
