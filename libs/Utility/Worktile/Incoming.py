@@ -32,4 +32,4 @@ def job_error(users=[], text=""):
 
 
 def job_exception(users=[]):
-    return job_error(build_info=build_info, users=users, text=get_traceback())
+    return job_error(users=users, text=get_traceback())
