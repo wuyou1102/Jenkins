@@ -39,6 +39,9 @@ def build_p1():
         make('mkimg_g4.sh')
         dst_folder = copy_image(_type="P1")
         Utility.zip_folder(dst_folder)
+        make('mkimg_odm.sh')
+        dst_folder = copy_odm_image(_type="P1")
+        Utility.zip_folder(dst_folder)
 
 
 def make(script):
@@ -77,6 +80,28 @@ def copy_image(_type):
     # dst_folder = Utility.create_folder(os.path.join(JobFunc.get_deploy_path(_type), _type))
     deploy_path = JobFunc.get_deploy_path(_type)
     long_version = JobFunc.get_version_number(deploy_path)
+    short_version = long_version.split('.')[-1]
+    dst_folder = Utility.create_folder(path=os.path.join(deploy_path, long_version))
+    for f in os.listdir(output_folder):
+        if f.startswith(full):
+            shutil.copy(src=os.path.join(output_folder, f),
+                        dst=os.path.join(dst_folder, "B2%sF_%s.img" % (_type, short_version)))
+        elif f.startswith(u_disk1) or f.startswith(u_disk2):
+            shutil.copy(src=os.path.join(output_folder, f),
+                        dst=os.path.join(dst_folder, "B2%sU_%s.img" % (_type, short_version)))
+        else:
+            print "wuyou debug:->%s" % f
+    return dst_folder
+
+
+def copy_odm_image(_type):
+    u_disk1 = 'artosyn-upgrade-B2%sU.' % _type
+    u_disk2 = 'B2%sU.' % _type
+    full = 'B2%sF.' % _type
+    # dst_folder = Utility.create_folder(os.path.join(JobFunc.get_deploy_path(_type), _type))
+    deploy_path = JobFunc.get_deploy_path(_type)
+    long_version = JobFunc.get_version_number(deploy_path)
+    long_version = long_version.replace("9B01", "9B02")
     short_version = long_version.split('.')[-1]
     dst_folder = Utility.create_folder(path=os.path.join(deploy_path, long_version))
     for f in os.listdir(output_folder):
